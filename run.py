@@ -58,9 +58,43 @@ def separate_line():
     Print a - line to end the sections
     """
     print(" ")
-    print("- "*20)
+    print("- "*25)
     print(" ")
 
+
+
+def get_players_names():
+    """
+    Players can enter their name
+    """
+    while True:
+        player1name = input("Please enter Player1 name:\n")
+
+        if validate_username(player1name):
+            time.sleep(1)
+            print(f"Hello {player1name}!\n")
+            break
+    
+    while True:
+        player2name = input("Please enter Player2 name:\n")
+
+        if validate_username(player2name):
+            time.sleep(1)
+            print(f"Hello {player2name}!\n")
+            break
+    
+    time.sleep(1)
+    separate_line()
+    print(f"Are you ready?\n{player1name} & {player2name}, let's play the game!")
+    separate_line()
+
+def validate_username(playername):
+    if len(playername) < 2 or len(playername) > 12:
+        print("Player name must be between 2 - 12 characters long. Please try again.\n")
+    elif not playername.isalpha():
+        print("Player name must only contain A-Z. Please try again.\n")
+    else:
+        return True
 
 
 def main():
