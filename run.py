@@ -39,9 +39,9 @@ def select_game():
         get_players_names()
 
     elif game_selected == "2":
-        print("Player vs computer")
+        print("Player vs computer game selected")
         print(" ")
-        # Add function for a game with computer
+        login_or_register()
 
     # Validate if answers is either 1 or 2    
     while game_selected not in ("1", "2"):
@@ -60,7 +60,6 @@ def separate_line():
     print(" ")
     print("- "*25)
     print(" ")
-
 
 
 def get_players_names():
@@ -88,6 +87,7 @@ def get_players_names():
     print(f"Are you ready?\n{player1name} & {player2name}, let's play the game!")
     separate_line()
 
+
 def validate_username(playername):
     if len(playername) < 2 or len(playername) > 12:
         print("Player name must be between 2 - 12 characters long. Please try again.\n")
@@ -95,6 +95,35 @@ def validate_username(playername):
         print("Player name must only contain A-Z. Please try again.\n")
     else:
         return True
+
+
+def login_or_register():
+    """
+    Verify if the player wants to register to existing account
+    or create a new user
+    """
+    print("Would you like to:")
+    selected_option = input("1) Log in\n2) Create a new player\n")
+    
+    separate_line()
+
+    # Log in option
+    if selected_option == "1":
+        print("Selected Log in option")
+        #add function to create an account
+        
+    # Register option
+    elif selected_option == "2":
+        print("Create an account")
+        #add function to create an account
+
+    while selected_option not in ("1", "2"):
+        print("Please choose between one of the options.")
+        selected_option = input("1) Log in\n2) Create a new player\n")
+
+        separate_line()
+
+    return selected_option    
 
 
 def main():
