@@ -149,7 +149,6 @@ def validate_user_email(email):
         print("Please try again")
 
 
-
 def login_or_register():
     """
     Verify if the player wants to register to an existing account
@@ -175,8 +174,15 @@ def login_or_register():
         
     # Register to an existing account option
     elif selected_option == "2":
-        create_new_player()
+        register_new_player()
 
+
+def register_new_player():
+    """
+    Register the new player.
+    """
+    player_info = create_new_player()
+    update_players_worksheet(player_info)
 
 def create_new_player():
     """
@@ -205,9 +211,20 @@ def create_new_player():
             break
             
         else:
-            print(f"Sorry {player_name}, this email is already register.")
+            print(f"Sorry {player_name}, this email is already registered.")
             print("Please try another email.\n")
     
+    return [player_name, email]
+
+
+def update_players_worksheet(data):
+    """
+    Update players worksheet, add new row with the player's data provided.
+    """
+    players_worksheet = SHEET.worksheet("Players")
+    players_worksheet.append_row(data)
+    print("Worksheet updated successfully.\n")
+
 
 
 def main():
