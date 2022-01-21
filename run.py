@@ -1,7 +1,10 @@
 import time
 import gspread
 from google.oauth2.service_account import Credentials
+from email_validator import validate_email, EmailNotValidError
 
+# Scope and constant variables defined as in love_sandwiches walk-through project
+# by Code Institute
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -12,11 +15,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('connect4_database')
-
-# confirm access to google sheet
-players = SHEET.worksheet('Players')
-players_data = players.get_all_values()
-print(players_data)
 
 
 def welcome():
@@ -42,6 +40,7 @@ print("Each column is numbered and you need to enter a column number in which yo
 print("Good luck and enjoy!!!")
 print(" ")
 
+
 def select_game():
     """
     the program will first show two possible options
@@ -52,6 +51,13 @@ def select_game():
     game_selected = input(game_options)
     separate_line()
 
+    # Validate if answers is either 1 or 2    
+    while game_selected not in ("1", "2"):
+        print("Please choose between one of the options:")
+        game_selected = input(game_options)
+
+        separate_line()
+
     if game_selected == "1":
         print("2 players game selected")
         print(" ")
@@ -61,13 +67,6 @@ def select_game():
         print("Player vs computer game selected")
         print(" ")
         login_or_register()
-
-    # Validate if answers is either 1 or 2    
-    while game_selected not in ("1", "2"):
-        print("Please choose between one of the options.")
-        game_selected = input(game_options)
-
-        separate_line()
 
     return game_selected
 
@@ -108,6 +107,10 @@ def get_players_names():
 
 
 def validate_username(playername):
+    """
+    Validation if the user name input meets the criteria
+    It should be between 2 - 12 long using only A-Z
+    """
     if len(playername) < 2 or len(playername) > 12:
         print("Player name must be between 2 - 12 characters long. Please try again.\n")
     elif not playername.isalpha():
@@ -116,25 +119,30 @@ def validate_username(playername):
         return True
 
 
+def validate_user_email(email):
+    """
+    Validate the email address.
+    It must be of the form name@example.com
+    """
+    try:
+        validate_email(email)
+
+        return True
+
+    except EmailNotValidError as e:
+        print(str(e))
+        print("Please try again")
+
+
 def login_or_register():
     """
-    Verify if the player wants to register to existing account
-    or create a new user
+    Verify if the player wants to register to an existing account
+    or create a new user/player
     """
     print("Would you like to:")
     selected_option = input("1) Log in\n2) Create a new player\n")
     
     separate_line()
-
-    # Log in option
-    if selected_option == "1":
-        print("Selected Log in option")
-        #add function to create an account
-        
-    # Register option
-    elif selected_option == "2":
-        print("Create an account")
-        #add function to create an account
 
     while selected_option not in ("1", "2"):
         print("Please choose between one of the options.")
@@ -142,8 +150,40 @@ def login_or_register():
 
         separate_line()
 
-    return selected_option    
+    # Log in option
+    if selected_option == "1":
+        print("Selected Log in option")
+        #add function for user login
+        
+    # Register to an existing account option
+    elif selected_option == "2":
+        create_new_player()
 
+
+def create_new_player():
+    """
+    Create a new account for the player
+    Collect player's name and email
+    Check if it's already in the database
+    """
+    print("Creating a new player....")
+
+    players_worksheet = SHEET.worksheet("Players")
+    email_column = players_worksheet.col_values(2)
+
+    while True:
+        player_name = input("What's your name?\n")
+
+        if validate_username(player_name):
+            break
+      
+    while True:
+        email = input("What is your email address?\n").strip()
+
+        if validate_user_email(email):
+            break
+
+    print(email_column)
 
 def main():
     """
