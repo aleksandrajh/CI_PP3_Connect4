@@ -73,7 +73,7 @@ def select_game():
 
 def separate_line():
     """
-    Print a - line to end the sections
+    Print a - line to separate messages
     """
     print(" ")
     print("- "*25)
@@ -119,6 +119,21 @@ def validate_username(playername):
         return True
 
 
+def get_email():
+    """
+    Ask user to input their email address
+    """
+    while True:
+        email = input("What is your email address?\n").strip()
+
+        separate_line()
+
+        if validate_user_email(email):
+            break
+
+    return email
+
+
 def validate_user_email(email):
     """
     Validate the email address.
@@ -134,11 +149,13 @@ def validate_user_email(email):
         print("Please try again")
 
 
+
 def login_or_register():
     """
     Verify if the player wants to register to an existing account
     or create a new user/player
     """
+    time.sleep(1)
     print("Would you like to:")
     selected_option = input("1) Log in\n2) Create a new player\n")
     
@@ -152,6 +169,7 @@ def login_or_register():
 
     # Log in option
     if selected_option == "1":
+        time.sleep(1)
         print("Selected Log in option")
         #add function for user login
         
@@ -166,6 +184,7 @@ def create_new_player():
     Collect player's name and email
     Check if it's already in the database
     """
+    time.sleep(1)
     print("Creating a new player....")
 
     players_worksheet = SHEET.worksheet("Players")
@@ -173,17 +192,23 @@ def create_new_player():
 
     while True:
         player_name = input("What's your name?\n")
+        print(" ")
 
         if validate_username(player_name):
             break
-      
+
     while True:
-        email = input("What is your email address?\n").strip()
+        email = get_email()
 
-        if validate_user_email(email):
+        # Verify if email is already in use
+        if email not in email_column:
             break
+            
+        else:
+            print(f"Sorry {player_name}, this email is already register.")
+            print("Please try another email.\n")
+    
 
-    print(email_column)
 
 def main():
     """
