@@ -2,6 +2,10 @@ import time
 import gspread
 from google.oauth2.service_account import Credentials
 from email_validator import validate_email, EmailNotValidError
+from colorama import init
+
+# Initializes Colorama
+init(autoreset=True)
 
 # Scope and constant variables defined as in love_sandwiches walk-through project
 # by Code Institute
@@ -16,20 +20,26 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('connect4_database')
 
+YELLOW_TEXT = "\033[1;33;40m"
+RED_TEXT = "\033[1;31;40m"
+GREEN_TEXT = "\033[1;32;48m"
+BLUE_TEXT = "\033[1;34;48m"
+
 
 def welcome():
     """
     Add welcome page
     Display game name and author
     """
+
 print(" ")
 print(" ")
-print(" _____                                   _        ___ ")
-print("/  __ \                                 | |      /   |")
-print("| /  \/  ___   _ __   _ __    ___   ___ | |_    / /| |")
-print("| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __|  / /_| |")
-print("| \__/\| (_) || | | || | | ||  __/| (__ | |_   \___  |")
-print(" \____/ \___/ |_| |_||_| |_| \___| \___| \__|      |_/")
+print(YELLOW_TEXT + " _____                                   _        ___ ")
+print(YELLOW_TEXT + "/  __ \                                 | |      /   |")
+print(YELLOW_TEXT + "| /  \/  ___   _ __   _ __    ___   ___ | |_    / /| |")
+print(RED_TEXT + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __|  / /_| |")
+print(RED_TEXT + "| \__/\| (_) || | | || | | ||  __/| (__ | |_   \___  |")
+print(YELLOW_TEXT + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|      |_/")
 print(" ")
 print("           Created by Aleksandra H.")
 print(" ")
@@ -46,24 +56,24 @@ def select_game():
     The program will first show two possible options of the game
     User can select a game for either 2 or 1 player
     """
-    print("Select game option:")
+    print(GREEN_TEXT + "Select game option:")
     game_options = "1) 2 Players \n2) Player vs. Computer\n"
     game_selected = input(game_options)
     separate_line()
 
     # Validate if answer is either 1 or 2    
     while game_selected not in ("1", "2"):
-        print("Please choose between one of the two options:")
+        print(GREEN_TEXT + "Please choose between one of the two options:")
         game_selected = input(game_options)
 
         separate_line()
 
     if game_selected == "1":
-        print("2 players game selected\n")
+        print(BLUE_TEXT + "2 players game selected\n")
         get_players_names()
 
     elif game_selected == "2":
-        print("Player vs computer game selected\n")
+        print(BLUE_TEXT + "Player vs computer game selected\n")
         login_or_register()
 
     return game_selected
@@ -88,7 +98,7 @@ def get_players_names():
 
         if validate_username(player1name):
             time.sleep(1)
-            print(f"Hello {player1name}!\n")
+            print(BLUE_TEXT + f"Hello {player1name}!\n")
             break
     
     while True:
@@ -96,13 +106,15 @@ def get_players_names():
 
         if validate_username(player2name):
             time.sleep(1)
-            print(f"Hello {player2name}!")
+            print(BLUE_TEXT + f"Hello {player2name}!")
             break
     
     time.sleep(1)
     separate_line()
-    print(f"Are you ready?\n{player1name} & {player2name}, let's play the game!")
+    print(GREEN_TEXT + f"Are you ready?\n{player1name} & {player2name}, let's play the game!")
     separate_line()
+    
+    # PLAY THE GAME for 2 players
 
 
 def validate_username(playername):
@@ -111,10 +123,10 @@ def validate_username(playername):
     It should be between 2 - 12 long using only A-Z
     """
     if len(playername) < 2 or len(playername) > 12:
-        print("\nPlayer name must be between 2 - 12 characters long. Please try again.\n")
-    
+        print(RED_TEXT + "\nPlayer name must be between 2 - 12 characters long. Please try again.\n")
+
     elif not playername.isalpha():
-        print("\nPlayer name must only contain A-Z. Please try again.\n")
+        print(RED_TEXT + "\nPlayer name must only contain A-Z. Please try again.\n")
     
     else:
         return True
@@ -146,8 +158,8 @@ def validate_user_email(email):
         return True
 
     except EmailNotValidError as e:
-        print(str(e))
-        print("Please try again.")
+        print(RED_TEXT + str(e))
+        print(RED_TEXT + "Please try again.")
 
 
 # Option for 1 player game
@@ -157,7 +169,7 @@ def login_or_register():
     or register a new user
     """
     time.sleep(1)
-    print("Would you like to:")
+    print(GREEN_TEXT + "Would you like to:")
     options = "1) Log in\n2) Create a new player\n"
     selected_option = input(options)
     separate_line()
@@ -182,7 +194,7 @@ def log_in_player():
     """
     User can log in to existing account
     """
-    print("Welcome back! Please help me verify your login details.")
+    print(BLUE_TEXT + "Welcome back! Please help me verify your login details.")
 
     while True:
         email = get_email()
@@ -190,7 +202,7 @@ def log_in_player():
 
         if existing_player:
             print("Just a confirmation that the user exists on the worksheet")
-            # Add function to start the game for this user 
+            # Add function to start the game for this user
             break
             
         else:
@@ -253,7 +265,7 @@ def create_new_player():
     Check if email is already in the database
     """
     time.sleep(1)
-    print("Creating a new player...")
+    print(BLUE_TEXT + "Creating a new player...")
 
     players_worksheet = SHEET.worksheet("Players")
     email_column = players_worksheet.col_values(2)
@@ -285,8 +297,7 @@ def update_players_worksheet(data):
     """
     players_worksheet = SHEET.worksheet("Players")
     players_worksheet.append_row(data)
-    print("Thanks, your details have been registered!.\n")
-
+    print(BLUE_TEXT + "Thanks, your details have been registered!\n")
 
 
 def main():
