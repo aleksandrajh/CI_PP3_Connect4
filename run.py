@@ -87,13 +87,13 @@ def separate_line():
     print("- "*30)
     print(" ")
 
-
 # Option for 2 players game
 def get_players_names():
     """
     Players can enter their names
     """
     while True:
+        global player1name
         player1name = input("Please enter Player1 name:\n")
 
         if validate_username(player1name):
@@ -102,6 +102,7 @@ def get_players_names():
             break
     
     while True:
+        global player2name 
         player2name = input("Please enter Player2 name:\n")
 
         if validate_username(player2name):
@@ -114,8 +115,9 @@ def get_players_names():
     print(GREEN_TEXT + f"Are you ready?\n{player1name} & {player2name}, let's play the game!")
     separate_line()
     
+    time.sleep(2)
     # PLAY THE GAME for 2 players
-
+    run_game()
 
 def validate_username(playername):
     """
@@ -271,6 +273,7 @@ def create_new_player():
     email_column = players_worksheet.col_values(2)
 
     while True:
+        global player_name
         player_name = input("What's your name?\n")
         print(" ")
 
@@ -297,8 +300,44 @@ def update_players_worksheet(data):
     """
     players_worksheet = SHEET.worksheet("Players")
     players_worksheet.append_row(data)
-    print(BLUE_TEXT + "Thanks, your details have been registered!\n")
+    print(BLUE_TEXT + f"Thanks {player_name}, your details have been registered!\n")
 
+
+BOARD_WIDTH = 7
+BOARD_HEIGHT = 6
+
+class Board():
+    def __init__(self):
+        self.board = [[' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+                      [' ', ' ', ' ', ' ', ' ', ' ', ' ' ]]
+
+    def display_board(self):
+        """
+        Display a game board of 7 columns and 6 rows
+        """
+        for row in range(0, BOARD_HEIGHT):
+            print(BLUE_TEXT + '|', end="")
+            for col in range(0, BOARD_WIDTH):
+                print(BLUE_TEXT + f"  {self.board[row][col]}  |", end="")
+            print("\n")
+
+        print(BLUE_TEXT + " -"*21)
+
+        # Display number of columns on the board
+        for row in range(BOARD_WIDTH):
+            print(BLUE_TEXT + f"   {row+1}  ", end="")
+        print("\n")
+
+
+def run_game():
+    game = Board()
+    game.display_board()
+ 
 
 def main():
     """
