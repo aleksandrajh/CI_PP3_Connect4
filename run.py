@@ -317,6 +317,7 @@ class Board():
                       [' ', ' ', ' ', ' ', ' ', ' ', ' ' ]]
 
         self.moves = 0
+        self.last_move = [-1, -1] # Coordinates ([row, column]) outside of the board
 
     def display_board(self):
         """
@@ -357,6 +358,7 @@ class Board():
                 else:
                     self.board[row][column] = YELLOW_TEXT + self.whos_move()
                 
+                self.last_move = [row, column]
                 self.moves += 1
                 return True
 
@@ -364,6 +366,20 @@ class Board():
         print(RED_TEXT + "You cannot put a piece in the full column. Please choose another column.\n")
         return False
 
+
+    def winning_move(self):
+        last_row = self.last_move[0]
+        last_col = self.last_move[1]
+        last_move = self.board[last_row][last_col] # either 'X' or 'O'
+        print(self.last_move) #coordinates [row, column]
+
+        # Check horizontal lines for win (4 pieces in a row)
+        for row in range(0, BOARD_HEIGHT):
+            for col in range(0, (BOARD_WIDTH - 3)): # Subtracting 3 as impossible to connect 4 starting at [row, col > 3]
+                if(last_move == self.board[row][col] and last_move == self.board[row][col+1] and last_move == self.board[row][col+2] and  last_move == self.board[row][col+3]):
+                    self.display_board()
+                    return True
+        return False
 
 def run_game():
     """
@@ -387,7 +403,12 @@ def run_game():
             except:
                 print(RED_TEXT + f"Please choose a column between 1 - {BOARD_WIDTH}.\n")
 
- 
+        
+        # The game is over when the winner is
+        game_won = game.winning_move()
+
+
+
 def main():
     """
     Run all program functions
