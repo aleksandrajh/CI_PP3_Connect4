@@ -323,6 +323,7 @@ class Board():
         """
         Display a game board of 7 columns and 6 rows
         """
+        print(" ")
         for row in range(0, BOARD_HEIGHT):
             print(BLUE_TEXT + '|', end="")
             for col in range(0, BOARD_WIDTH):
@@ -371,12 +372,20 @@ class Board():
         last_row = self.last_move[0]
         last_col = self.last_move[1]
         last_move = self.board[last_row][last_col] # either 'X' or 'O'
-        print(self.last_move) #coordinates [row, column]
 
-        # Check horizontal lines for win (4 pieces in a row)
-        for row in range(0, BOARD_HEIGHT):
-            for col in range(0, (BOARD_WIDTH - 3)): # Subtracting 3 as impossible to connect 4 starting at [row, col > 3]
-                if(last_move == self.board[row][col] and last_move == self.board[row][col+1] and last_move == self.board[row][col+2] and  last_move == self.board[row][col+3]):
+        # # Check horizontal lines for win (4 pieces in a row)
+        # for row in range(0, BOARD_HEIGHT):
+        #     for col in range(0, (BOARD_WIDTH - 3)): # Subtracting 3 as impossible to connect 4 starting at [row, col > 3]
+        #         if(last_move == self.board[row][col] and last_move == self.board[row][col+1] and last_move == self.board[row][col+2] and  last_move == self.board[row][col+3]):
+        #             self.display_board()
+        #             return True
+        # return False
+
+
+        # Check vertical lines for win
+        for row in range(0, (BOARD_HEIGHT-3)): # Subtracting 3 as impossible to connect 4 starting at [row < 3 , col]
+            for col in range(0, BOARD_WIDTH):
+                if(last_move == self.board[row][col] and last_move == self.board[row+1][col] and last_move == self.board[row+2][col] and  last_move == self.board[row+3][col]):
                     self.display_board()
                     return True
         return False
@@ -404,7 +413,7 @@ def run_game():
                 print(RED_TEXT + f"Please choose a column between 1 - {BOARD_WIDTH}.\n")
 
         
-        # The game is over when the winner is
+        # The game is over when the winner is found
         game_won = game.winning_move()
 
 
