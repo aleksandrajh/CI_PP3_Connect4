@@ -288,7 +288,7 @@ def create_new_player():
             break
             
         else:
-            print(f"Sorry {player_name}, this email is already registered.")
+            print(RED_TEXT + f"Sorry {player_name}, this email is already registered.")
             print("Please try another email.\n")
     
     return [player_name, email]
@@ -316,6 +316,8 @@ class Board():
                       [' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
                       [' ', ' ', ' ', ' ', ' ', ' ', ' ' ]]
 
+        self.moves = 0
+
     def display_board(self):
         """
         Display a game board of 7 columns and 6 rows
@@ -334,11 +336,53 @@ class Board():
         print("\n")
 
 
-def run_game():
-    game = Board()
-    game.display_board()
- 
+    def whos_move(self):
+        """
+        Alternate moves between player 1 and 2
+        """
+        pieces = ['X', 'O']
+        return pieces[self.moves % 2]
 
+
+    def move(self, column):
+        """
+        Look for the first available slot in the column
+        and place current player's piece in that space
+        """
+        for row in range(BOARD_HEIGHT-1, -1, -1):
+            if self.board[row][column] == ' ': # If the space has not been filled in yet
+                self.board[row][column] = self.whos_move()
+                self.moves += 1
+                return True
+
+        # if there is no available space in the column        
+        print(RED_TEXT + "You cannot put a piece in the full column. Please choose another column.\n")
+        return False
+
+
+def run_game():
+    """
+    Start the game once both players have validated their names 
+    """
+    game = Board()
+
+    game_won = False
+    
+    while not game_won:
+        game.display_board()
+       
+        is_move_valid = False
+        while not is_move_valid:
+            if game.whos_move() == 'X':
+                player_move = input(f"{player1name}'s move.\nYou play with 'X'. Choose a column 1 - {BOARD_WIDTH}:\n")
+            else:
+                player_move = input(f"{player2name}'s move.\nYou play with 'O'. Choose a column 1 - {BOARD_WIDTH}:\n")
+            try:
+                is_move_valid = game.move(int(player_move)-1) # 0-indexing of the board, input 1 will fill in column 0
+            except:
+                print(RED_TEXT + f"Please choose a column between 1 - {BOARD_WIDTH}.\n")
+
+ 
 def main():
     """
     Run all program functions
