@@ -325,7 +325,7 @@ class Board():
         for row in range(0, BOARD_HEIGHT):
             print(BLUE_TEXT + '|', end="")
             for col in range(0, BOARD_WIDTH):
-                print(BLUE_TEXT + f"  {self.board[row][col]}  |", end="")
+                print(f"  {self.board[row][col]}" + BLUE_TEXT +"  |", end="")
             print("\n")
 
         print(BLUE_TEXT + " -"*21)
@@ -351,7 +351,12 @@ class Board():
         """
         for row in range(BOARD_HEIGHT-1, -1, -1):
             if self.board[row][column] == ' ': # If the space has not been filled in yet
-                self.board[row][column] = self.whos_move()
+                # Display pieces in different colors on the board
+                if self.whos_move() == 'X':
+                    self.board[row][column] = RED_TEXT + self.whos_move() 
+                else:
+                    self.board[row][column] = YELLOW_TEXT + self.whos_move()
+                
                 self.moves += 1
                 return True
 
