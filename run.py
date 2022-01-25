@@ -382,13 +382,25 @@ class Board():
         # return False
 
 
-        # Check vertical lines for win
-        for row in range(0, (BOARD_HEIGHT-3)): # Subtracting 3 as impossible to connect 4 starting at [row < 3 , col]
-            for col in range(0, BOARD_WIDTH):
-                if(last_move == self.board[row][col] and last_move == self.board[row+1][col] and last_move == self.board[row+2][col] and  last_move == self.board[row+3][col]):
+        # # Check vertical lines for win
+        # for row in range(0, (BOARD_HEIGHT-3)): # Subtracting 3 as impossible to connect 4 starting at [row < 3 , col]
+        #     for col in range(0, BOARD_WIDTH):
+        #         if(last_move == self.board[row][col] and last_move == self.board[row+1][col] and last_move == self.board[row+2][col] and  last_move == self.board[row+3][col]):
+        #             self.display_board()
+        #             return True
+        # return False
+
+
+        # Check diagonal lines for win going up and to the right
+        for row in range(3, BOARD_HEIGHT): # Possible to connect 4 for starting at [row >= 3 & col =< 3]
+            for col in range(0, (BOARD_WIDTH-3)):
+                if(last_move == self.board[row][col] and last_move == self.board[row-1][col+1] and last_move == self.board[row-2][col+2] and  last_move == self.board[row-3][col+3]):
                     self.display_board()
                     return True
         return False
+
+         # Check diagonal lines for win going down and to the right
+        
 
 def run_game():
     """
