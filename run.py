@@ -405,12 +405,10 @@ class Board():
         if horizontal_win() or vertical_win() or diagonal_win():
             self.display_board()
             if last_move == RED_TEXT + 'X':
-                player_won = player1name
+                print(RED_TEXT +  f"\n-----> {player1name.upper()} is the winner! <-----\n")
             else:
-                player_won = player2name
+                print(YELLOW_TEXT +  f"\n-----> {player2name.upper()} is the winner! <-----\n")
 
-            print(GREEN_TEXT +  f"\n-----> {player_won.upper()} is the winner! <-----\n")
-            
             time.sleep(2)
             separate_line()
             play_again()
