@@ -4,6 +4,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from email_validator import validate_email, EmailNotValidError
 from colorama import init
+import os
 
 # Initializes Colorama
 init(autoreset=True)
@@ -33,23 +34,27 @@ def welcome():
     Display game name and author
     """
 
-print(" ")
-print(" ")
-print(YELLOW_TEXT + " _____                                   _        ___ ")
-print(YELLOW_TEXT + "/  __ \                                 | |      /   |")
-print(YELLOW_TEXT + "| /  \/  ___   _ __   _ __    ___   ___ | |_    / /| |")
-print(RED_TEXT + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __|  / /_| |")
-print(RED_TEXT + "| \__/\| (_) || | | || | | ||  __/| (__ | |_   \___  |")
-print(YELLOW_TEXT + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|      |_/")
-print(" ")
-print("           Created by Aleksandra H.")
-print(" ")
-print(" ")
-print("Game Rules:")
-print("The objective of the game is to be the first one to put four of your pieces which fall into columns next to each other in a row either horizontally, vertically or diagonally.")
-print("Each column is numbered and you need to enter a column number in which you want to drop your piece.")
-print("Good luck and enjoy!!!")
-print(" ")
+    print(" ")
+    print(" ")
+    print(" ")
+    print(YELLOW_TEXT + " _____                                   _        ___ ")
+    print(YELLOW_TEXT + "/  __ \                                 | |      /   |")
+    print(YELLOW_TEXT + "| /  \/  ___   _ __   _ __    ___   ___ | |_    / /| |")
+    print(RED_TEXT + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __|  / /_| |")
+    print(RED_TEXT + "| \__/\| (_) || | | || | | ||  __/| (__ | |_   \___  |")
+    print(YELLOW_TEXT + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|      |_/")
+    print(" ")
+    print(BLUE_TEXT + "           Created by Aleksandra H.")
+    print(" ")
+    print(" ")
+    time.sleep(1)
+    print("\u0332".join("Game Rules:"))
+    # print("Game Rules:")
+    print("The objective of the game is to be the first one to put four of your pieces which fall into columns next to each other in a row\neither horizontally, vertically or diagonally.")
+    print("Each column is numbered and you need to enter a column number in which you want to drop your piece.")
+    print("Good luck and enjoy!!!")
+    print(" ")
+    print(" ")
 
 
 def select_game():
@@ -57,6 +62,7 @@ def select_game():
     The program will first show two possible options of the game
     User can select a game for either 2 or 1 player
     """
+    time.sleep(1)
     print(GREEN_TEXT + "Select game option:")
     game_options = "1) 2 Players \n2) Player vs. Computer\n"
     game_selected = input(game_options)
@@ -113,12 +119,20 @@ def get_players_names():
     
     time.sleep(1)
     separate_line()
-    print(GREEN_TEXT + f"Are you ready?\n{player1name} & {player2name}, let's play the game!")
+    print(GREEN_TEXT + "Are you ready?" + RED_TEXT + f"\n{player1name}" + GREEN_TEXT + " & " + YELLOW_TEXT + f"{player2name}"  + GREEN_TEXT + ", let's play the game!")
     separate_line()
     
     time.sleep(2)
-    # PLAY THE GAME for 2 players
-    run_game()
+    cls()
+    run_game() #game for 2 players
+
+
+def cls():
+    """
+    Clear the console
+    """
+    os.system('cls' if os.name=='nt' else 'clear')
+
 
 def validate_username(playername):
     """
@@ -403,11 +417,12 @@ class Board():
             return False # if there is no winner
 
         if horizontal_win() or vertical_win() or diagonal_win():
+            cls()
             self.display_board()
             if last_move == RED_TEXT + 'X':
-                print(RED_TEXT +  f"\n-----> {player1name.upper()} is the winner! <-----\n")
+                print(GREEN_TEXT + f"\n-----> {player1name.upper()} is the winner! <-----\n")
             else:
-                print(YELLOW_TEXT +  f"\n-----> {player2name.upper()} is the winner! <-----\n")
+                print(GREEN_TEXT + f"\n-----> {player2name.upper()} is the winner! <-----\n")
 
             time.sleep(2)
             separate_line()
@@ -426,15 +441,18 @@ def run_game():
     
     while not game_won:
         # if the game continues and there is no winner
+        cls()
         game.display_board()
        
         is_move_valid = False
 
         while not is_move_valid:
             if game.whos_move() == 'X':
-                player_move = input(f"{player1name}'s move.\nYou play with 'X'. Choose a column 1 - {BOARD_WIDTH}:\n")
+                print(f"{player1name}'s move. You play with "  + RED_TEXT + "X")
+                player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
             else:
-                player_move = input(f"{player2name}'s move.\nYou play with 'O'. Choose a column 1 - {BOARD_WIDTH}:\n")
+                print(f"{player2name}'s move. You play with "  + YELLOW_TEXT + "O")
+                player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
             
             # if player types invalid input
             try:
@@ -447,6 +465,7 @@ def run_game():
 
         # The game is over if there is a tie
         if game.moves == BOARD_HEIGHT * BOARD_WIDTH:
+            cls()
             game.display_board()
             print(GREEN_TEXT + "\n----> The game is over - it's a tie! <----\n")
 
@@ -478,8 +497,8 @@ def play_again():
         run_game()
 
     elif selected == "2":
-        print(BLUE_TEXT + "Thanks for playing!\n")
         time.sleep(1)
+        cls()
         main()
 
     elif selected == "3":
