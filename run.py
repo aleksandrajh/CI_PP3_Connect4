@@ -1,3 +1,4 @@
+import sys
 import time
 import gspread
 from google.oauth2.service_account import Credentials
@@ -409,7 +410,10 @@ class Board():
                 player_won = player2name
 
             print(GREEN_TEXT +  f"\n-----> {player_won.upper()} is the winner! <-----\n")
-            return last_move
+            
+            time.sleep(2)
+            separate_line()
+            play_again()
 
         return False # If there are no winners
 
@@ -446,8 +450,44 @@ def run_game():
         # The game is over if there is a tie
         if game.moves == BOARD_HEIGHT * BOARD_WIDTH:
             game.display_board()
-            print(GREEN_TEXT + "The game is over - it's a tie!\n")
-            return
+            print(GREEN_TEXT + "\n----> The game is over - it's a tie! <----\n")
+
+            time.sleep(2)
+            separate_line()
+            play_again()
+    
+
+def play_again():
+    """
+    Give players an option to carry on playing with same names
+    or go to the main menu
+    """
+    print(GREEN_TEXT + "What would you like to do:")
+    options = "1) Play again\n2) Go to main menu\n3) Quit game\n"
+    selected = input(options)
+    separate_line()
+
+    # Validate if answer is either 1 or 2 or 3    
+    while selected not in ("1", "2", "3"):
+        print(GREEN_TEXT + "Please choose between one of below options:")
+        selected = input(options)
+
+        separate_line()
+
+    if selected == "1":
+        print(BLUE_TEXT + f"Ok... loading a game for {player1name} & {player2name}!\n")
+        time.sleep(2)
+        run_game()
+
+    elif selected == "2":
+        print(BLUE_TEXT + "Thanks for playing!\n")
+        time.sleep(1)
+        main()
+
+    elif selected == "3":
+        print(BLUE_TEXT + "Thanks for playing! See you soon!\n")
+        sys.exit()
+
 
 def main():
     """
