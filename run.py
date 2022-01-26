@@ -22,8 +22,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('connect4_database')
 
-YELLOW_TEXT = "\033[1;33;40m"
-RED_TEXT = "\033[1;31;40m"
+YELLOW_TEXT = "\033[1;33;48m"
+RED_TEXT = "\033[1;31;48m"
 GREEN_TEXT = "\033[1;32;48m"
 BLUE_TEXT = "\033[1;34;48m"
 
