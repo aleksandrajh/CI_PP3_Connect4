@@ -303,8 +303,8 @@ def update_players_worksheet(data):
     print(BLUE_TEXT + f"Thanks {player_name}, your details have been registered!\n")
 
 
-BOARD_WIDTH = 8 #test
-BOARD_HEIGHT = 9 #test
+BOARD_WIDTH = 7
+BOARD_HEIGHT = 6
 
 class Board():
     def __init__(self):
@@ -356,17 +356,21 @@ class Board():
                 self.moves += 1
                 return True
 
-        # if there is no available space in the column        
+        # if there is no available space in the column     
         print(RED_TEXT + "You cannot put a piece in the full column. Please choose another column.\n")
         return False
 
 
     def winning_move(self):
+        """
+        Check for 4 pieces in a row
+        either horizontally, vertically or diagonally
+        """
         last_row = self.last_move[0]
         last_col = self.last_move[1]
         last_move = self.board[last_row][last_col] # either 'X' or 'O'
 
-        # Check horizontal lines for win (4 pieces in a row)
+        # Check horizontal lines for win
         def horizontal_win():
             for row in range(0, BOARD_HEIGHT):
                 for col in range(0, (BOARD_WIDTH - 3)): # Subtracting 3 as impossible to connect 4 starting at [row, col > 3]
@@ -407,26 +411,30 @@ class Board():
             print(GREEN_TEXT +  f"\n-----> {player_won.upper()} is the winner! <-----\n")
             return last_move
 
-        return False #If there are no winners
+        return False # If there are no winners
 
 
 def run_game():
     """
-    Start the game once both players have validated their names 
+    Start the game once both players have validated their names
     """
     game = Board()
 
     game_won = False
     
     while not game_won:
+        # if the game continues and there is no winner
         game.display_board()
        
         is_move_valid = False
+
         while not is_move_valid:
             if game.whos_move() == 'X':
                 player_move = input(f"{player1name}'s move.\nYou play with 'X'. Choose a column 1 - {BOARD_WIDTH}:\n")
             else:
                 player_move = input(f"{player2name}'s move.\nYou play with 'O'. Choose a column 1 - {BOARD_WIDTH}:\n")
+            
+            # if player types invalid input
             try:
                 is_move_valid = game.move(int(player_move)-1) # 0-indexing of the board, input 1 will fill in column 0
             except:
@@ -438,7 +446,7 @@ def run_game():
         # The game is over if there is a tie
         if game.moves == BOARD_HEIGHT * BOARD_WIDTH:
             game.display_board()
-            print(GREEN_TEXT + "The game is over - it's a tie!")
+            print(GREEN_TEXT + "The game is over - it's a tie!\n")
             return
 
 def main():
