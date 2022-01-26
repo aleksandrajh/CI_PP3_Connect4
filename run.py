@@ -303,25 +303,12 @@ def update_players_worksheet(data):
     print(BLUE_TEXT + f"Thanks {player_name}, your details have been registered!\n")
 
 
-BOARD_WIDTH = 7
-BOARD_HEIGHT = 6
+BOARD_WIDTH = 8 #test
+BOARD_HEIGHT = 9 #test
 
 class Board():
     def __init__(self):
-        # self.board = [[' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        #               [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        #               [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        #               [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        #               [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        #               [' ', ' ', ' ', ' ', ' ', ' ', ' ']]
-
-        self.board = [['O', 'X', 'O', 'X', ' ', ' ', 'O'],
-                      ['O', 'X', 'O', 'X', 'O', 'X', 'X'],
-                      ['O', 'X', 'O', 'O', 'O', 'X', 'O'],
-                      ['X', 'O', 'X', 'O', 'X', 'O', 'X'],
-                      ['X', 'O', 'X', 'O', 'X', 'O', 'O'],
-                      ['X', 'O', 'X', 'O', 'X', 'O', 'X']]
-          
+        self.board = [[' ' for x in range(BOARD_WIDTH)] for y in range(BOARD_HEIGHT)]
         self.moves = 0
         self.last_move = [-1, -1] # Coordinates ([row, column]) outside of the board
 
@@ -449,7 +436,7 @@ def run_game():
         game_won = game.winning_move()
 
         # The game is over if there is a tie
-        if game.moves == 2:
+        if game.moves == BOARD_HEIGHT * BOARD_WIDTH:
             game.display_board()
             print(GREEN_TEXT + "The game is over - it's a tie!")
             return
