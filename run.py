@@ -49,7 +49,6 @@ def welcome():
     print(" ")
     time.sleep(1)
     print("\u0332".join("Game Rules:"))
-    # print("Game Rules:")
     print("The objective of the game is to be the first one to put four of your pieces which fall into columns next to each other in a row\neither horizontally, vertically or diagonally.")
     print("Each column is numbered and you need to enter a column number in which you want to drop your piece.")
     print("Good luck and enjoy!!!")
@@ -330,6 +329,7 @@ class Board():
     def display_board(self):
         """
         Display a game board of 7 columns and 6 rows
+        Dimensions specified in the constant variable
         """
         print(" ")
         for row in range(0, BOARD_HEIGHT):
@@ -371,7 +371,7 @@ class Board():
                 self.moves += 1
                 return True
 
-        # if there is no available space in the column     
+        # If there is no available space in the column
         print(RED_TEXT + "You cannot put a piece in the full column. Please choose another column.\n")
         return False
 
@@ -440,7 +440,7 @@ def run_game():
     game_won = False
     
     while not game_won:
-        # if the game continues and there is no winner
+        # If the game continues and there is no winner
         cls()
         game.display_board()
        
@@ -476,8 +476,8 @@ def run_game():
 
 def play_again():
     """
-    Give players an option to carry on playing with same names
-    or go to the main menu
+    Give players an option to carry on playing with same players names
+    go back to the main menu or exit the game
     """
     print(GREEN_TEXT + "What would you like to do:")
     options = "1) Play again\n2) Go to main menu\n3) Quit game\n"
