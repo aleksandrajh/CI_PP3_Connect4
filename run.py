@@ -23,10 +23,10 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('connect4_database')
 
 # Text colors
-YELLOW = "\033[1;33;48m"
-RED = "\033[1;31;48m"
-GREEN = "\033[1;32;48m"
-BLUE = "\033[1;34;48m"
+YELLOW = "\033[0;33;48m"
+RED = "\033[0;31;48m"
+GREEN = "\033[0;32;48m"
+BLUE = "\033[0;34;48m"
 
 
 def welcome():
@@ -34,13 +34,12 @@ def welcome():
     Add welcome page
     Display game name and author
     """
-    print(" ")
-    print(YELLOW + " _____                                   _      ___ ")
-    print(YELLOW + "/  __ \                                 | |    /   |")
-    print(YELLOW + "| /  \/  ___   _ __   _ __    ___   ___ | |_  / /| |")
-    print(RED + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __|/ /_| |")
-    print(RED + "| \__/\| (_) || | | || | | ||  __/| (__ | |_ \___  |")
-    print(YELLOW + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|    |_/")
+    print(YELLOW + "  ____                                   _       ___ ")
+    print(YELLOW + " / __ \                                 | |     /   |")
+    print(YELLOW + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
+    print(RED + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
+    print(RED + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
+    print(YELLOW + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
     print(" ")
     print(BLUE + "           Created by Aleksandra H.")
     print(" ")
@@ -226,7 +225,7 @@ def log_in_player():
             break
 
         else:
-            print("Sorry, this email is not registered.")
+            print(RED + "Sorry, this email is not registered.")
             selected_option = email_not_registered()
 
             if selected_option == "1":
@@ -243,7 +242,7 @@ def email_not_registered():
     Give user an option to enter another email or create a new user
     """
     time.sleep(1)
-    print("Would you like to:")
+    print(GREEN + "Would you like to:")
     options = "1) Try another email\n2) Create a new player\n"
     selected_option = input(options)
     separate_line()
