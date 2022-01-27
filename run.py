@@ -25,8 +25,8 @@ SHEET = GSPREAD_CLIENT.open('connect4_database')
 # Text colors
 YELLOW = "\033[0;33;48m"
 RED = "\033[0;31;48m"
-GREEN = "\033[0;32;48m"
-BLUE = "\033[0;34;48m"
+GREEN = "\033[1;32;48m"
+BLUE = "\033[1;34;48m"
 
 
 def welcome():
