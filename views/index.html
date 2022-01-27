@@ -1,5 +1,56 @@
 <body>
     <button onclick="window.location.reload()">Run Connect 4</button>
+    <div id="maindiv">
+            <div id="terminal"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <ul class="social-icons">
+          <li>
+            <a href="https://github.com/aleksandracodes/CI_PP3_Connect4/" target="_blank" rel="noopener" aria-label="View the project on GitHub page"><i class="fab fa-github"></i></a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/aleksandrahaniok/" target="_blank" rel="noopener" aria-label="Visit developer's LinkedIn (opens in new tab)"><i class="fab fa-linkedin"></i></a>
+          </li>
+        </ul>
+  
+        <p class="copyrights">© Copyrights 2022 Aleksandra H.</p>
+      </footer>
+  
+    <!-- Font Awesome script -->
+    <script src="https://kit.fontawesome.com/b75c116a85.js" crossorigin="anonymous"></script>
+    
+    <!-- Run startup command -->
+    <script>
+        var term = new Terminal({
+            cols: 80,
+            rows: 24
+        });
+        term.open(document.getElementById('terminal'));
+        term.writeln('Running startup command: python3 run.py');
+        term.writeln('');
+
+        var ws = new WebSocket(location.protocol.replace('http', 'ws') + '//' + location.hostname + (location.port ? (
+            ':' + location.port) : '') + '/');
+
+        ws.onopen = function () {
+            new attach.attach(term, ws);
+        };
+
+        ws.onerror = function (e) {
+            console.log(e);
+        };
+        // Set focus in the terminal
+        document.getElementsByClassName("xterm-helper-textarea")[0].focus();
+    </script>
+</body>
+
+
+
+
+
+    <!-- <button onclick="window.location.reload()">Run Connect 4</button>
     <div id="terminal"></div>
 
     <script>
@@ -24,4 +75,4 @@
         // Set focus in the terminal
         document.getElementsByClassName("xterm-helper-textarea")[0].focus();
     </script>
-</body>
+</body> -->
