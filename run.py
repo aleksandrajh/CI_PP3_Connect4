@@ -20,7 +20,10 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+
+# My updated values
 SHEET = GSPREAD_CLIENT.open('connect4_database')
+PLAYERS_WORKSHEET = SHEET.worksheet("Players")
 
 # Text colors
 YELLOW = "\033[1;33;48m"
@@ -151,36 +154,6 @@ def validate_username(playername):
         return True
 
 
-def get_email():
-    """
-    Ask user to input their email address
-    """
-    while True:
-        email = input("What is your email address?\n").strip()
-
-        separate_line()
-
-        if validate_user_email(email):
-            break
-
-    return email
-
-
-def validate_user_email(email):
-    """
-    Validate the email address.
-    It must be of the form name@example.com
-    """
-    try:
-        validate_email(email)
-
-        return True
-
-    except EmailNotValidError as e:
-        print(RED + str(e))
-        print(RED + "Please try again.")
-
-
 # Option for 1 player game
 def login_or_register():
     """
@@ -220,8 +193,12 @@ def log_in_player():
         existing_player = is_player_registered(email)
 
         if existing_player:
-            print("Just a confirmation that the user exists on the worksheet")
-            # Add function to start the game for this user
+            email_row = PLAYERS_WORKSHEET.find(email).row
+            global old_player_name
+            old_player_name = PLAYERS_WORKSHEET.row_values(email_row)[0]
+            start_game_message(old_player_name)
+            
+            # Add function to start the game for this player
             break
 
         else:
@@ -234,6 +211,48 @@ def log_in_player():
             elif selected_option == "2":
                 register_new_player()
                 break
+
+
+def get_email():
+    """
+    Ask user to input their email address
+    """
+    while True:
+        email = input("What is your email address?\n").strip()
+
+        separate_line()
+
+        if validate_user_email(email):
+            break
+
+    return email
+
+
+def validate_user_email(email):
+    """
+    Validate the email address.
+    It must be of the form name@example.com
+    """
+    try:
+        validate_email(email)
+        return True
+
+    except EmailNotValidError as e:
+        print(RED + str(e))
+        print(RED + "Please try again.")
+
+
+def is_player_registered(email):
+    """
+    Verify if the player is registered
+    by checking if email exists in the database
+    """
+    email_column = PLAYERS_WORKSHEET.col_values(2)
+    
+    if email in email_column:
+        return True
+    else:
+        return False
 
 
 def email_not_registered():
@@ -256,20 +275,6 @@ def email_not_registered():
     return selected_option
 
 
-def is_player_registered(email):
-    """
-    Verify if the player is registered
-    by checking if email exists in the database
-    """
-    players_worksheet = SHEET.worksheet("Players")
-    email_column = players_worksheet.col_values(2)
-
-    if email in email_column:
-        return True
-    else:
-        return False
-
-
 def register_new_player():
     """
     Register a new player
@@ -287,9 +292,7 @@ def create_new_player():
     time.sleep(1)
     print(BLUE + "Creating a new player...")
 
-    players_worksheet = SHEET.worksheet("Players")
-    email_column = players_worksheet.col_values(2)
-
+    email_column = PLAYERS_WORKSHEET.col_values(2)
     while True:
         global player_name
         player_name = input("What's your name?\n")
@@ -316,9 +319,17 @@ def update_players_worksheet(data):
     """
     Update players worksheet, add a new row with the player's data provided
     """
-    players_worksheet = SHEET.worksheet("Players")
-    players_worksheet.append_row(data)
+    PLAYERS_WORKSHEET.append_row(data)
     print(BLUE + f"Thanks {player_name}, your details have been registered!\n")
+
+
+def start_game_message(player_name):
+    time.sleep(1)
+    print(RED + f"{player_name}" + GREEN + ", are you ready?")
+    print(GREEN + "Let's play the game!")
+    separate_line()
+    time.sleep(2)
+    # cls()
 
 
 BOARD_WIDTH = 7
@@ -454,7 +465,7 @@ class Board():
         return False  # If there are no winners
 
 
-def run_game():
+def run_game2():
     """
     Start the game once both players have validated their names
     """
