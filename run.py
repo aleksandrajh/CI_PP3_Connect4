@@ -23,8 +23,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('connect4_database')
 
 # Text colors
-YELLOW = "\033[0;33;48m"
-RED = "\033[0;31;48m"
+YELLOW = "\033[1;33;48m"
+RED = "\033[1;31;48m"
 GREEN = "\033[1;32;48m"
 BLUE = "\033[1;34;48m"
 
@@ -41,11 +41,9 @@ def welcome():
     print(RED + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
     print(YELLOW + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
     print(" ")
-    print(BLUE + "           Created by Aleksandra H.")
-    print(" ")
     print(" ")
     time.sleep(1)
-    print("\u0332".join("Game Rules:"))
+    print(BLUE + "\u0332".join("Game Rules:"))
     print("The objective of the game is to be the first one to put four " +
           "of your pieces")
     print("which fall into columns next to each other in a row")
