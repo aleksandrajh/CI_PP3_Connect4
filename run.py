@@ -168,7 +168,7 @@ def login_or_register():
 
     # Validate if answers is either 1 or 2
     while selected_option not in ("1", "2"):
-        print("Please choose between one of the two options:")
+        print(GREEN + "Please choose between one of the two options:")
         selected_option = input(options)
 
         separate_line()
@@ -202,7 +202,7 @@ def log_in_player():
             break
 
         else:
-            print(RED + "Sorry, this email is not registered.")
+            print(RED + "\nSorry, this email is not registered.\n")
             selected_option = email_not_registered()
 
             if selected_option == "1":
@@ -218,9 +218,7 @@ def get_email():
     Ask user to input their email address
     """
     while True:
-        email = input("What is your email address?\n").strip()
-
-        separate_line()
+        email = input("What's your email address?\n").strip()
 
         if validate_user_email(email):
             break
@@ -238,8 +236,8 @@ def validate_user_email(email):
         return True
 
     except EmailNotValidError as e:
-        print(RED + str(e))
-        print(RED + "Please try again.")
+        print(RED + "\n" + str(e) )
+        print(RED + "Please try again.\n")
 
 
 def is_player_registered(email):
@@ -293,12 +291,13 @@ def create_new_player():
     print(BLUE + "Creating a new player...")
 
     email_column = PLAYERS_WORKSHEET.col_values(2)
+
     while True:
-        global player_name
-        player_name = input("What's your name?\n")
+        global new_player_name
+        new_player_name = input("What's your name?\n")
         print(" ")
 
-        if validate_username(player_name):
+        if validate_username(new_player_name):
             break
 
     while True:
@@ -309,10 +308,10 @@ def create_new_player():
             break
 
         else:
-            print(RED + f"Sorry {player_name}, this email is already used.")
-            print("Please try another email.\n")
+            print(RED + f"\nSorry {new_player_name}, this email is already used.")
+            print(RED + "Please try another email.\n")
 
-    return [player_name, email]
+    return [new_player_name, email]
 
 
 def update_players_worksheet(data):
@@ -320,11 +319,13 @@ def update_players_worksheet(data):
     Update players worksheet, add a new row with the player's data provided
     """
     PLAYERS_WORKSHEET.append_row(data)
-    print(BLUE + f"Thanks {player_name}, your details have been registered!\n")
+    print(BLUE + f"\nThanks {new_player_name}, your details have been registered!")
+    start_game_message(new_player_name)
 
 
 def start_game_message(player_name):
     time.sleep(1)
+    separate_line()
     print(RED + f"{player_name}" + GREEN + ", are you ready?")
     print(GREEN + "Let's play the game!")
     separate_line()
@@ -465,7 +466,7 @@ class Board():
         return False  # If there are no winners
 
 
-def run_game2():
+def run_game():
     """
     Start the game once both players have validated their names
     """
