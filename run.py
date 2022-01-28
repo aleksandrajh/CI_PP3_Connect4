@@ -27,6 +27,8 @@ YELLOW = "\033[1;33;48m"
 RED = "\033[1;31;48m"
 GREEN = "\033[1;32;48m"
 BLUE = "\033[1;34;48m"
+LOGO_Y = "\033[0;33;48m"
+LOGO_R = "\033[0;31;48m"
 
 
 def welcome():
@@ -34,12 +36,12 @@ def welcome():
     Add welcome page
     Display game name and author
     """
-    print(YELLOW + "  ____                                   _       ___ ")
-    print(YELLOW + " / __ \                                 | |     /   |")
-    print(YELLOW + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
-    print(RED + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
-    print(RED + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
-    print(YELLOW + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
+    print(LOGO_Y + "  ____                                   _       ___ ")
+    print(LOGO_Y + " / __ \                                 | |     /   |")
+    print(LOGO_Y + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
+    print(LOGO_R + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
+    print(LOGO_R + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
+    print(LOGO_Y + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
     print(" ")
     print(" ")
     time.sleep(1)
