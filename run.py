@@ -106,7 +106,7 @@ def game_rules():
     print(" ")
     time.sleep(1)
     separate_line()
-    input("Press any key to exit...\n")
+    input("Enter any key to exit...\n")
     cls()
     main()
 
@@ -122,18 +122,18 @@ def start_game():
     separate_line()
 
     # Validate if answer is either 1 or 2
-    while answered not in ("1", "yes", "y", "2", "no", "n"):
+    while answered not in ("1", "y", "2", "n"):
         print(GREEN + "Please choose between one of the two options:")
         answered = input(answer)
 
         separate_line()
 
-    if answered == "1" or answered == "yes" or answered == "y":
+    if answered == "1" or answered == "y":
         cls()
         logo()
         log_in_players()
 
-    elif answered == "2" or answered == "no" or answered == "n":
+    elif answered == "2" or answered == "n":
        cls()
        logo()
        register_new_players()
@@ -165,11 +165,11 @@ def log_in_players():
         if existing_player:
             email_row = PLAYERS_WORKSHEET.find(email).row
             player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-            print(BLUE + f"Hello {player1name}!\n")
+            print(BLUE + f"\nHello {player1name}!\n")
             break
 
         else:
-            input_correct_email()
+            input_correct_email("Player1")
 
     while True:
         email = get_email("Player2")
@@ -179,11 +179,11 @@ def log_in_players():
             email_row = PLAYERS_WORKSHEET.find(email).row
             player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
 
-            print(BLUE + f"Hello {player2name}!\n")
+            print(BLUE + f"\nHello {player2name}!\n")
             break
         
         else:
-            input_correct_email()
+            input_correct_email("Player2")
 
     time.sleep(2)
     start_game_message(player1name, player2name)
@@ -229,7 +229,7 @@ def is_player_registered(email):
         return False
 
 
-def input_correct_email():
+def input_correct_email(player):
     """
     Asks players to input their email again
     if the email was not found in the database
@@ -241,7 +241,7 @@ def input_correct_email():
         print("Please write your email again:")
 
     elif selected_option == "2":
-        register_new_players()
+        register_single_player(player)
 
 
 def email_not_registered():
@@ -262,6 +262,19 @@ def email_not_registered():
         separate_line()
 
     return selected_option
+
+
+def register_single_player(player_number):
+    """
+    Register one player
+    if they forgot their email address during the log-in step
+    """
+    time.sleep(1)
+    print(BLUE + "Creating a new user for you...")
+    print(" ")
+    new_player = player_number
+    player_info = create_new_players(new_player)
+    update_players_worksheet(player_info)  # Log data of one player on database
 
 
 def register_new_players():
@@ -314,7 +327,7 @@ def create_new_players(player_number):
 
         # Verify if email is already in use
         if player_email not in email_column:
-            print(BLUE + f"\nThanks {player}!\n")
+            print(BLUE + "\nThank you!\n")
             break
 
         else:
