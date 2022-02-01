@@ -6,6 +6,7 @@ from google.oauth2.service_account import Credentials
 from email_validator import validate_email, EmailNotValidError
 from colorama import init
 import os
+import random
 
 # Initializes Colorama
 init(autoreset=True)
@@ -153,7 +154,7 @@ def log_in_players():
     """
     User can log in to existing account
     """
-    print(BLUE + "Welcome back! Please help me verify your login details.")
+    print(GREEN + "Welcome back! Please help me verify your login details.")
     global player1name
     global player2name
 
@@ -184,7 +185,7 @@ def log_in_players():
         else:
             input_correct_email()
 
-    time.sleep(1)
+    time.sleep(2)
     start_game_message(player1name, player2name)
 
 
@@ -288,7 +289,7 @@ def register_new_players():
     separate_line()
     print(f"Thanks {player1name} & {player2name}, your details have been registered!\n")
 
-    time.sleep(1)
+    time.sleep(2)
     start_game_message(player1name, player2name)
     separate_line()
 
@@ -375,7 +376,7 @@ class Board():
     def __init__(self):
         self.board = [[' ' for x in range(BOARD_WIDTH)]
                       for y in range(BOARD_HEIGHT)]
-        self.moves = 0
+        self.moves = random.randint(0,1)  # Random player starts the game
         self.last_move = [-1, -1]  # Coordinates outside of the board
 
     def display_board(self):
