@@ -266,25 +266,30 @@ def email_not_registered():
 def register_new_players():
     """
     Register new players
+    Ask players for an input and save first value in a variable.
+    It will be displayed in the game to indicate which player's move it is
     """
     global player1name
-    player1name = "Player1"
+    player1 = "Player1"  # It will first display, that player 1 has to input data
     global player2name
-    player2name = "Player2"
+    player2 = "Player2"  # It will first display, that player 1 has to input data
 
     time.sleep(1)
     print(BLUE + "Starting the registration...")
     print(" ")
-    player_1_info = create_new_players(player1name)
-    player_2_info = create_new_players(player2name)
-    update_players_worksheet(player_1_info)
+    player_1_info = create_new_players(player1)  
+    player_2_info = create_new_players(player2)
+    update_players_worksheet(player_1_info)  # Log data of both players in separate rows
     update_players_worksheet(player_2_info)
     
+    player1name = player_1_info[0]  # Update value of 'Player1' to player's name
+    player2name = player_2_info[0]  # Update value of 'Player2' to player's name
+
     separate_line()
-    print(f"Thanks {player_1_info[0]} & {player_2_info[0]}, your details have been registered!\n")
+    print(f"Thanks {player1name} & {player2name}, your details have been registered!\n")
 
     time.sleep(1)
-    start_game_message(player_1_info[0], player_2_info[0])
+    start_game_message(player1name, player2name)
     separate_line()
 
 
@@ -337,7 +342,9 @@ def validate_username(player_name):
 
 def update_players_worksheet(data):
     """
-    Update players worksheet, add a new row with players data provided
+    Update players worksheet
+    Add a new row with data provided by both players
+    
     """
     PLAYERS_WORKSHEET.append_row(data)
 
