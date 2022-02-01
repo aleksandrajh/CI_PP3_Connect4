@@ -1,5 +1,6 @@
 import sys
 import time
+from time import sleep
 import gspread
 from google.oauth2.service_account import Credentials
 from email_validator import validate_email, EmailNotValidError
@@ -34,11 +35,14 @@ LOGO_Y = "\033[0;33;48m"
 LOGO_R = "\033[0;31;48m"
 
 
-def welcome():
+def logo():
     """
     Add welcome page
     Display game name and author
     """
+    print(" ")
+    print(BLUE + "Welcome to:")
+    print(" ")
     print(LOGO_Y + "  ____                                   _       ___ ")
     print(LOGO_Y + " / __ \                                 | |     /   |")
     print(LOGO_Y + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
@@ -47,20 +51,69 @@ def welcome():
     print(LOGO_Y + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
     print(" ")
     print(" ")
+    print(BLUE + "                                        for 2 players")
+    print(" ")
     time.sleep(1)
+
+
+def start_to_do():
+    """
+    The program will first show two possible options of the game
+    User can select to view the game rules or start the game
+    """
+    time.sleep(1)
+    print(GREEN + "What would you like to do?")
+    start_options = "1) View the game rules\n2) Play the game\n"
+    start_option_selected = input(start_options)
+    separate_line()
+
+    # Validate if answer is either 1 or 2
+    while start_option_selected not in ("1", "2"):
+        print(GREEN + "Please choose between one of the two options:")
+        start_option_selected = input(start_options)
+        separate_line()
+
+    if start_option_selected == "1":
+        cls()
+        logo()
+        game_rules()
+
+    elif start_option_selected == "2":
+        play_game()
+
+    return start_option_selected
+
+
+def game_rules():
+    print(" ")
     print(BLUE + "\u0332".join("Game Rules:"))
     print("The objective of the game is to be the first one to put four " +
           "of your pieces")
+    time.sleep(0.5)
     print("which fall into columns next to each other in a row")
+    time.sleep(0.5)
     print("either horizontally --, vertically | or diagonally / \.")
+    time.sleep(0.5)
     print("Each column is numbered and you need to enter a column number")
+    time.sleep(0.5)
     print("in which you want to drop your piece.")
-    print("Good luck and enjoy!!!")
+    print(" ")
+    enjoy = "Good luck and enjoy!!!"
+    for char in enjoy:
+        sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
     print(" ")
     print(" ")
+    print(" ")
+    time.sleep(1)
+    separate_line()
+    input("Press any key to exit...\n")
+    cls()
+    main()
 
 
-def select_game():
+def play_game():
     """
     The program will first show two possible options of the game
     User can select a game for either 2 or 1 player
@@ -546,8 +599,8 @@ def main():
     """
     Run all program functions
     """
-    welcome()
-    select_game()
+    logo()
+    start_to_do()
 
 if __name__ == "__main__":
     main()
