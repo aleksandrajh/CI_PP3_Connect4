@@ -134,9 +134,9 @@ def start_game():
         log_in_players()
 
     elif answered == "2" or answered == "n":
-       cls()
-       logo()
-       register_new_players()
+        cls()
+        logo()
+        register_new_players()
 
     return answered
 
@@ -181,7 +181,7 @@ def log_in_players():
 
             print(BLUE + f"\nHello {player2name}!\n")
             break
-        
+
         else:
             input_correct_email("Player2")
 
@@ -212,7 +212,7 @@ def validate_user_email(email):
         return True
 
     except EmailNotValidError as e:
-        print(RED + "\n" + str(e) )
+        print(RED + "\n" + str(e))
         print(RED + "Please try again.\n")
 
 
@@ -222,7 +222,7 @@ def is_player_registered(email):
     by checking if email exists in the database
     """
     email_column = PLAYERS_WORKSHEET.col_values(2)
-    
+
     if email in email_column:
         return True
     else:
@@ -284,23 +284,26 @@ def register_new_players():
     It will be displayed in the game to indicate which player's move it is
     """
     global player1name
-    player1 = "Player1"  # It will first display, that player 1 has to input data
+    player1 = "Player1"  # It will first display that player1 has to input data
     global player2name
-    player2 = "Player2"  # It will first display, that player 1 has to input data
+    player2 = "Player2"  # It will first display that player1 has to input data
 
     time.sleep(1)
     print(BLUE + "Starting the registration...")
     print(" ")
-    player_1_info = create_new_players(player1)  
+    player_1_info = create_new_players(player1)
     player_2_info = create_new_players(player2)
-    update_players_worksheet(player_1_info)  # Log data of both players in separate rows
+
+    # Log data of both players in separate rows
+    update_players_worksheet(player_1_info)
     update_players_worksheet(player_2_info)
-    
-    player1name = player_1_info[0]  # Update value of 'Player1' to player's name
-    player2name = player_2_info[0]  # Update value of 'Player2' to player's name
+
+    player1name = player_1_info[0]  # Update value of Player1 to player's name
+    player2name = player_2_info[0]  # Update value of Player2 to player's name
 
     separate_line()
-    print(f"Thanks {player1name} & {player2name}, your details have been registered!\n")
+    print(f"Thanks {player1name} & {player2name}," +
+           "your details have been registered!\n")
 
     time.sleep(2)
     start_game_message(player1name, player2name)
@@ -314,7 +317,7 @@ def create_new_players(player_number):
     Check if email is already in the database
     """
     email_column = PLAYERS_WORKSHEET.col_values(2)
-    
+
     while True:
         player = input(f"{player_number} - what's your name?\n")
         print(" ")
@@ -333,7 +336,6 @@ def create_new_players(player_number):
         else:
             print(RED + f"\nSorry {player}, this email is already used.")
             print(RED + "Please try another email.\n")
-    
 
     return [player, player_email]
 
@@ -358,7 +360,6 @@ def update_players_worksheet(data):
     """
     Update players worksheet
     Add a new row with data provided by both players
-    
     """
     PLAYERS_WORKSHEET.append_row(data)
 
@@ -389,7 +390,7 @@ class Board():
     def __init__(self):
         self.board = [[' ' for x in range(BOARD_WIDTH)]
                       for y in range(BOARD_HEIGHT)]
-        self.moves = random.randint(0,1)  # Random player starts the game
+        self.moves = random.randint(0, 1)  # Random player starts the game
         self.last_move = [-1, -1]  # Coordinates outside of the board
 
     def display_board(self):
