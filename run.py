@@ -40,7 +40,6 @@ def logo():
     Add welcome page
     Display game name and author
     """
-    print(" ")
     print(BLUE + "Welcome to:")
     print(" ")
     print(LOGO_Y + "  ____                                   _       ___ ")
@@ -86,7 +85,6 @@ def start_to_do():
 
 
 def game_rules():
-    print(" ")
     print(BLUE + "\u0332".join("Game Rules:"))
     print("The objective of the game is to be the first one to put four " +
           "of your pieces")
@@ -104,8 +102,6 @@ def game_rules():
         sleep(0.1)
         sys.stdout.write(char)
         sys.stdout.flush()
-    print(" ")
-    print(" ")
     print(" ")
     time.sleep(1)
     separate_line()
@@ -137,7 +133,9 @@ def start_game():
         log_in_players()
 
     elif answered == "2" or answered == "no" or answered == "n":
-        print("Put here option to register players")
+       cls()
+       logo()
+       register_new_players()
 
     return answered
 
@@ -156,9 +154,10 @@ def log_in_players():
     User can log in to existing account
     """
     print(BLUE + "Welcome back! Please help me verify your login details.")
+    global player1name
+    global player2name
 
     while True:
-        global player1name
         email = get_email("Player1")
         existing_player = is_player_registered(email)
 
@@ -172,7 +171,6 @@ def log_in_players():
             input_correct_email()
 
     while True:
-        global player2name
         email = get_email("Player2")
         existing_player = is_player_registered(email)
 
@@ -187,14 +185,7 @@ def log_in_players():
             input_correct_email()
 
     time.sleep(1)
-    separate_line()
-    print(GREEN + "Are you ready?")
-    print(RED + f"{player1name}" + GREEN + " & " + YELLOW + f"{player2name}")
-    print(GREEN + "Let's play the game!")
-    separate_line()
-    time.sleep(2)
-    cls()
-    run_game()
+    start_game_message(player1name, player2name)
 
 
 def get_email(playername):
@@ -249,7 +240,7 @@ def input_correct_email():
         print("Please write your email again:")
 
     elif selected_option == "2":
-        register_new_player()
+        register_new_players()
 
 
 def email_not_registered():
@@ -272,41 +263,94 @@ def email_not_registered():
     return selected_option
 
 
-
-
-
-# THIS WILL BE USED TO REGISTER BOTH PLAYERS
-def get_players_names():
+def register_new_players():
     """
-    Players can enter their names
+    Register new players
     """
-    while True:
-        global player1name
-        player1name = input("Please enter Player1 name:\n")
-
-        if validate_username(player1name):
-            time.sleep(1)
-            print(BLUE + f"Hello {player1name}!\n")
-            break
-
-    while True:
-        global player2name
-        player2name = input("Please enter Player2 name:\n")
-
-        if validate_username(player2name):
-            time.sleep(1)
-            print(BLUE + f"Hello {player2name}!")
-            break
+    global player1name
+    player1name = "Player1"
+    global player2name
+    player2name = "Player2"
 
     time.sleep(1)
+    print(BLUE + "Starting the registration...")
+    print(" ")
+    player_1_info = create_new_players(player1name)
+    player_2_info = create_new_players(player2name)
+    update_players_worksheet(player_1_info)
+    update_players_worksheet(player_2_info)
+    
+    separate_line()
+    print(f"Thanks {player_1_info[0]} & {player_2_info[0]}, your details have been registered!\n")
+
+    time.sleep(1)
+    start_game_message(player_1_info[0], player_2_info[0])
+    separate_line()
+
+
+def create_new_players(player_number):
+    """
+    Create a new player
+    Get player's name and email
+    Check if email is already in the database
+    """
+    email_column = PLAYERS_WORKSHEET.col_values(2)
+    
+    while True:
+        player = input(f"{player_number} - what's your name?\n")
+        print(" ")
+
+        if validate_username(player):
+            break
+
+    while True:
+        player_email = get_email(player)
+
+        # Verify if email is already in use
+        if player_email not in email_column:
+            print(BLUE + f"\nThanks {player}!\n")
+            break
+
+        else:
+            print(RED + f"\nSorry {player}, this email is already used.")
+            print(RED + "Please try another email.\n")
+    
+
+    return [player, player_email]
+
+
+def validate_username(player_name):
+    """
+    Validation if the user name input meets the criteria
+    It should be between 2 - 12 long using only A-Z
+    """
+    if len(player_name) < 2 or len(player_name) > 12:
+        print(RED + "Player name must be between 2 - 12 characters long.")
+        print(RED + "Please try again.\n")
+
+    elif not player_name.isalpha():
+        print(RED + "Player name must only contain A-Z. Please try again.\n")
+
+    else:
+        return True
+
+
+def update_players_worksheet(data):
+    """
+    Update players worksheet, add a new row with players data provided
+    """
+    PLAYERS_WORKSHEET.append_row(data)
+
+
+def start_game_message(player1, player2):
     separate_line()
     print(GREEN + "Are you ready?")
-    print(RED + f"{player1name}" + GREEN + " & " + YELLOW + f"{player2name}")
+    print(RED + f"{player1}" + GREEN + " & " + YELLOW + f"{player2}")
     print(GREEN + "Let's play the game!")
     separate_line()
     time.sleep(2)
     cls()
-    run_game() 
+    run_game()
 
 
 def cls():
@@ -314,113 +358,6 @@ def cls():
     Clear the console
     """
     os.system("cls" if os.name == "nt" else "clear")
-
-
-def validate_username(playername):
-    """
-    Validation if the user name input meets the criteria
-    It should be between 2 - 12 long using only A-Z
-    """
-    if len(playername) < 2 or len(playername) > 12:
-        print(RED + "\nPlayer name must be between 2 - 12 characters long.")
-        print(RED + "Please try again.\n")
-
-    elif not playername.isalpha():
-        print(RED + "\nPlayer name must only contain A-Z. Please try again.\n")
-
-    else:
-        return True
-
-
-
-# Option for 1 player game
-def login_or_register():
-    """
-    Player has an option to either log in to an exisiting account
-    or register a new user
-    """
-    time.sleep(1)
-    print(GREEN + "Would you like to:")
-    options = "1) Log in\n2) Create a new player\n"
-    selected_option = input(options)
-    separate_line()
-
-    # Validate if answers is either 1 or 2
-    while selected_option not in ("1", "2"):
-        print(GREEN + "Please choose between one of the two options:")
-        selected_option = input(options)
-
-        separate_line()
-
-    if selected_option == "1":
-        time.sleep(1)
-        log_in_player()
-
-    elif selected_option == "2":
-        time.sleep(1)
-        register_new_player()
-
-
-
-
-def register_new_player():
-    """
-    Register a new player
-    """
-    player_info = create_new_player()
-    update_players_worksheet(player_info)
-
-
-def create_new_player():
-    """
-    Create a new player
-    Get player's name and email
-    Check if email is already in the database
-    """
-    time.sleep(1)
-    print(BLUE + "Creating a new player...")
-
-    email_column = PLAYERS_WORKSHEET.col_values(2)
-
-    while True:
-        global new_player_name
-        new_player_name = input("What's your name?\n")
-        print(" ")
-
-        if validate_username(new_player_name):
-            break
-
-    while True:
-        email = get_email()
-
-        # Verify if email is already in use
-        if email not in email_column:
-            break
-
-        else:
-            print(RED + f"\nSorry {new_player_name}, this email is already used.")
-            print(RED + "Please try another email.\n")
-
-    return [new_player_name, email]
-
-
-def update_players_worksheet(data):
-    """
-    Update players worksheet, add a new row with the player's data provided
-    """
-    PLAYERS_WORKSHEET.append_row(data)
-    print(BLUE + f"\nThanks {new_player_name}, your details have been registered!")
-    start_game_message(new_player_name)
-
-
-def start_game_message(player_name):
-    time.sleep(1)
-    separate_line()
-    print(RED + f"{player_name}" + GREEN + ", are you ready?")
-    print(GREEN + "Let's play the game!")
-    separate_line()
-    time.sleep(2)
-    # cls()
 
 
 BOARD_WIDTH = 7
