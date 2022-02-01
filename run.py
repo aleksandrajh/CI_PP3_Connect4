@@ -53,6 +53,7 @@ def logo():
     print(" ")
     print(BLUE + "                                        for 2 players")
     print(" ")
+    print(" ")
     time.sleep(1)
 
 
@@ -79,7 +80,7 @@ def start_to_do():
         game_rules()
 
     elif start_option_selected == "2":
-        play_game()
+        start_game()
 
     return start_option_selected
 
@@ -113,33 +114,32 @@ def game_rules():
     main()
 
 
-def play_game():
+def start_game():
     """
-    The program will first show two possible options of the game
-    User can select a game for either 2 or 1 player
+    The program will check if users have played the game before
     """
     time.sleep(1)
-    print(GREEN + "Select game option:")
-    game_options = "1) 2 Players \n2) Player vs. Computer\n"
-    game_selected = input(game_options)
+    print(GREEN + "Have you played before?")
+    answer = "1) Yes \n2) No\n"
+    answered = input(answer)
     separate_line()
 
     # Validate if answer is either 1 or 2
-    while game_selected not in ("1", "2"):
+    while answered not in ("1", "yes", "y", "2", "no", "n"):
         print(GREEN + "Please choose between one of the two options:")
-        game_selected = input(game_options)
+        answered = input(answer)
 
         separate_line()
 
-    if game_selected == "1":
-        print(BLUE + "2 players game selected\n")
-        get_players_names()
+    if answered == "1" or answered == "yes" or answered == "y":
+        cls()
+        logo()
+        log_in_players()
 
-    elif game_selected == "2":
-        print(BLUE + "Player vs computer game selected\n")
-        login_or_register()
+    elif answered == "2" or answered == "no" or answered == "n":
+        print("Put here option to register players")
 
-    return game_selected
+    return answered
 
 
 def separate_line():
@@ -151,27 +151,40 @@ def separate_line():
     print(" ")
 
 
-def get_players_names():  # Option for 2 players game
+def log_in_players():
     """
-    Players can enter their names
+    User can log in to existing account
     """
+    print(BLUE + "Welcome back! Please help me verify your login details.")
+
     while True:
         global player1name
-        player1name = input("Please enter Player1 name:\n")
+        email = get_email("Player1")
+        existing_player = is_player_registered(email)
 
-        if validate_username(player1name):
-            time.sleep(1)
+        if existing_player:
+            email_row = PLAYERS_WORKSHEET.find(email).row
+            player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
             print(BLUE + f"Hello {player1name}!\n")
             break
 
+        else:
+            input_correct_email()
+
     while True:
         global player2name
-        player2name = input("Please enter Player2 name:\n")
+        email = get_email("Player2")
+        existing_player = is_player_registered(email)
 
-        if validate_username(player2name):
-            time.sleep(1)
-            print(BLUE + f"Hello {player2name}!")
+        if existing_player:
+            email_row = PLAYERS_WORKSHEET.find(email).row
+            player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
+
+            print(BLUE + f"Hello {player2name}!\n")
             break
+        
+        else:
+            input_correct_email()
 
     time.sleep(1)
     separate_line()
@@ -181,97 +194,15 @@ def get_players_names():  # Option for 2 players game
     separate_line()
     time.sleep(2)
     cls()
-    run_game()  # Game for 2 players
+    run_game()
 
 
-def cls():
-    """
-    Clear the console
-    """
-    os.system("cls" if os.name == "nt" else "clear")
-
-
-def validate_username(playername):
-    """
-    Validation if the user name input meets the criteria
-    It should be between 2 - 12 long using only A-Z
-    """
-    if len(playername) < 2 or len(playername) > 12:
-        print(RED + "\nPlayer name must be between 2 - 12 characters long.")
-        print(RED + "Please try again.\n")
-
-    elif not playername.isalpha():
-        print(RED + "\nPlayer name must only contain A-Z. Please try again.\n")
-
-    else:
-        return True
-
-
-# Option for 1 player game
-def login_or_register():
-    """
-    Player has an option to either log in to an exisiting account
-    or register a new user
-    """
-    time.sleep(1)
-    print(GREEN + "Would you like to:")
-    options = "1) Log in\n2) Create a new player\n"
-    selected_option = input(options)
-    separate_line()
-
-    # Validate if answers is either 1 or 2
-    while selected_option not in ("1", "2"):
-        print(GREEN + "Please choose between one of the two options:")
-        selected_option = input(options)
-
-        separate_line()
-
-    if selected_option == "1":
-        time.sleep(1)
-        log_in_player()
-
-    elif selected_option == "2":
-        time.sleep(1)
-        register_new_player()
-
-
-def log_in_player():
-    """
-    User can log in to existing account
-    """
-    print(BLUE + "Welcome back! Please help me verify your login details.")
-
-    while True:
-        email = get_email()
-        existing_player = is_player_registered(email)
-
-        if existing_player:
-            email_row = PLAYERS_WORKSHEET.find(email).row
-            global old_player_name
-            old_player_name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-            start_game_message(old_player_name)
-            
-            # Add function to start the game for this player
-            break
-
-        else:
-            print(RED + "\nSorry, this email is not registered.\n")
-            selected_option = email_not_registered()
-
-            if selected_option == "1":
-                print("Please write your email again:")
-
-            elif selected_option == "2":
-                register_new_player()
-                break
-
-
-def get_email():
+def get_email(playername):
     """
     Ask user to input their email address
     """
     while True:
-        email = input("What's your email address?\n").strip()
+        email = input(f"{playername} - what's your email address?\n").strip()
 
         if validate_user_email(email):
             break
@@ -306,6 +237,21 @@ def is_player_registered(email):
         return False
 
 
+def input_correct_email():
+    """
+    Asks players to input their email again
+    if the email was not found in the database
+    """
+    print(RED + "\nSorry, this email is not registered.\n")
+    selected_option = email_not_registered()
+
+    if selected_option == "1":
+        print("Please write your email again:")
+
+    elif selected_option == "2":
+        register_new_player()
+
+
 def email_not_registered():
     """
     Called when the email is not registered on the worksheet/database
@@ -324,6 +270,97 @@ def email_not_registered():
         separate_line()
 
     return selected_option
+
+
+
+
+
+# THIS WILL BE USED TO REGISTER BOTH PLAYERS
+def get_players_names():
+    """
+    Players can enter their names
+    """
+    while True:
+        global player1name
+        player1name = input("Please enter Player1 name:\n")
+
+        if validate_username(player1name):
+            time.sleep(1)
+            print(BLUE + f"Hello {player1name}!\n")
+            break
+
+    while True:
+        global player2name
+        player2name = input("Please enter Player2 name:\n")
+
+        if validate_username(player2name):
+            time.sleep(1)
+            print(BLUE + f"Hello {player2name}!")
+            break
+
+    time.sleep(1)
+    separate_line()
+    print(GREEN + "Are you ready?")
+    print(RED + f"{player1name}" + GREEN + " & " + YELLOW + f"{player2name}")
+    print(GREEN + "Let's play the game!")
+    separate_line()
+    time.sleep(2)
+    cls()
+    run_game() 
+
+
+def cls():
+    """
+    Clear the console
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+def validate_username(playername):
+    """
+    Validation if the user name input meets the criteria
+    It should be between 2 - 12 long using only A-Z
+    """
+    if len(playername) < 2 or len(playername) > 12:
+        print(RED + "\nPlayer name must be between 2 - 12 characters long.")
+        print(RED + "Please try again.\n")
+
+    elif not playername.isalpha():
+        print(RED + "\nPlayer name must only contain A-Z. Please try again.\n")
+
+    else:
+        return True
+
+
+
+# Option for 1 player game
+def login_or_register():
+    """
+    Player has an option to either log in to an exisiting account
+    or register a new user
+    """
+    time.sleep(1)
+    print(GREEN + "Would you like to:")
+    options = "1) Log in\n2) Create a new player\n"
+    selected_option = input(options)
+    separate_line()
+
+    # Validate if answers is either 1 or 2
+    while selected_option not in ("1", "2"):
+        print(GREEN + "Please choose between one of the two options:")
+        selected_option = input(options)
+
+        separate_line()
+
+    if selected_option == "1":
+        time.sleep(1)
+        log_in_player()
+
+    elif selected_option == "2":
+        time.sleep(1)
+        register_new_player()
+
+
 
 
 def register_new_player():
