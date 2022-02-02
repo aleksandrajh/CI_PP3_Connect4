@@ -56,7 +56,7 @@ def logo():
     time.sleep(1)
 
 
-def start_to_do() -> str:
+def main_menu() -> str:
     """
     The program will first show two possible options of the game
     User can select to view the game rules or start the game
@@ -134,12 +134,12 @@ def start_game() -> str:
     if answered == "1" or answered == "y":
         cls()
         logo()
-        log_in_players()
+        log_in_players(players)
 
     elif answered == "2" or answered == "n":
         cls()
         logo()
-        register_new_players()
+        register_new_players(players)
 
     return answered
 
@@ -153,40 +153,38 @@ def separate_line():
     print(" ")
 
 
-def log_in_players():
+
+players = ["Player1", "Player2"]
+
+
+def log_in_players(players):
     """
     User can log in to existing account
+    By input their email address which is saved in the 2 row of the spreadsheet
+    Their names are retrieved from the first row
     """
     print(GREEN + "Welcome back! Please help me verify your login details.")
+
     global player1name
     global player2name
 
-    while True:
-        email = get_email("Player1")
-        existing_player = is_player_registered(email)
+    for i, player in enumerate(players):
+        while True:
+            email = get_email(player)
+            existing_player = is_player_registered(email)
 
-        if existing_player:
-            email_row = PLAYERS_WORKSHEET.find(email).row
-            player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-            print(BLUE + f"\nHello {player1name}!\n")
-            break
+            if existing_player:
+                email_row = PLAYERS_WORKSHEET.find(email).row
+                if i == 0:
+                    player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
+                    print(BLUE + f"\nHello {player1name}!\n")
+                elif i == 1:
+                    player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
+                    print(BLUE + f"\nHello {player2name}!\n")
+                break
 
-        else:
-            input_correct_email("Player1")
-
-    while True:
-        email = get_email("Player2")
-        existing_player = is_player_registered(email)
-
-        if existing_player:
-            email_row = PLAYERS_WORKSHEET.find(email).row
-            player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-
-            print(BLUE + f"\nHello {player2name}!\n")
-            break
-
-        else:
-            input_correct_email("Player2")
+            else:
+                input_correct_email(player)
 
     time.sleep(2)
     start_game_message(player1name, player2name)
@@ -206,7 +204,7 @@ def get_email(playername: str) -> str:
     return email
 
 
-def validate_user_email(email: str) -> bool:
+def validate_user_email(email: str):
     """
     Validate the email address.
     It must be of the form name@example.com
@@ -286,32 +284,33 @@ def register_single_player(player_number: str):
     update_players_worksheet(player_info)  # Log data of one player on database
 
 
-def register_new_players():
+def register_new_players(players):
     """
     Register new players
     Ask players for an input and save first value (name) in a variable
     It will be displayed in the game to indicate which player's move it is
     """
     global player1name
-    player1 = "Player1"  # It will first display that Player1 has to input data
     global player2name
-    player2 = "Player2"  # It will first display that Player2 has to input data
 
     time.sleep(1)
     print(BLUE + "Starting the registration...")
     print(" ")
-    player_1_info = create_new_players(player1)
-    player_2_info = create_new_players(player2)
 
-    # Log data of both players in separate rows
-    update_players_worksheet(player_1_info)
-    update_players_worksheet(player_2_info)
-
-    player1name = player_1_info[0]  # Update value of Player1 to input name
-    player2name = player_2_info[0]  # Update value of Player2 to input name
+    while True:
+        for i, player in enumerate(players):
+            if i == 0:
+                player_1_info = create_new_players(player)
+                update_players_worksheet(player_1_info)
+                player1name = player_1_info[0]
+            elif i == 1:
+                player_2_info = create_new_players(player)
+                update_players_worksheet(player_2_info)
+                player2name = player_2_info[0]
+        break
 
     separate_line()
-    print(f"Thanks {player1name} & {player2name}," +
+    print(f"Thanks {player1name} & {player2name}, " +
            "your details have been registered!\n")
 
     time.sleep(2)
@@ -615,7 +614,7 @@ def main():
     Run all program functions
     """
     logo()
-    start_to_do()
+    main_menu()
 
 if __name__ == "__main__":
     main()
