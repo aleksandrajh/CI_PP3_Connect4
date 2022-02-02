@@ -38,8 +38,7 @@ LOGO_R = "\033[0;31;48m"
 
 def logo():
     """
-    Add welcome page
-    Display game name and author
+    Display game name
     """
     print(BLUE + "Welcome to:")
     print(" ")
@@ -57,7 +56,7 @@ def logo():
     time.sleep(1)
 
 
-def start_to_do():
+def start_to_do() -> str:
     """
     The program will first show two possible options of the game
     User can select to view the game rules or start the game
@@ -86,16 +85,20 @@ def start_to_do():
 
 
 def game_rules():
+    """
+    Display game rules
+    which user can exit by entering any key
+    """
     print(BLUE + "\u0332".join("Game Rules:"))
     print("The objective of the game is to be the first one to put four " +
           "of your pieces")
-    time.sleep(0.5)
+    time.sleep(1)
     print("which fall into columns next to each other in a row")
-    time.sleep(0.5)
+    time.sleep(1)
     print("either horizontally --, vertically | or diagonally / \.")
-    time.sleep(0.5)
+    time.sleep(1)
     print("Each column is numbered and you need to enter a column number")
-    time.sleep(0.5)
+    time.sleep(1)
     print("in which you want to drop your piece.")
     print(" ")
     enjoy = "Good luck and enjoy!!!"
@@ -111,7 +114,7 @@ def game_rules():
     main()
 
 
-def start_game():
+def start_game() -> str:
     """
     The program will check if users have played the game before
     """
@@ -189,9 +192,10 @@ def log_in_players():
     start_game_message(player1name, player2name)
 
 
-def get_email(playername):
+def get_email(playername: str) -> str:
     """
     Ask user to input their email address
+    @param playername(string): Player's number
     """
     while True:
         email = input(f"{playername} - what's your email address?\n").strip()
@@ -202,10 +206,11 @@ def get_email(playername):
     return email
 
 
-def validate_user_email(email):
+def validate_user_email(email: str) -> bool:
     """
     Validate the email address.
     It must be of the form name@example.com
+    @param email(string): Player's email address
     """
     try:
         validate_email(email)
@@ -216,10 +221,11 @@ def validate_user_email(email):
         print(RED + "Please try again.\n")
 
 
-def is_player_registered(email):
+def is_player_registered(email: str) -> bool:
     """
     Verify if the player is registered
     by checking if email exists in the database
+    @param email(string): Player's email address
     """
     email_column = PLAYERS_WORKSHEET.col_values(2)
 
@@ -229,10 +235,12 @@ def is_player_registered(email):
         return False
 
 
-def input_correct_email(player):
+def input_correct_email(player: str):
     """
     Asks players to input their email again
     if the email was not found in the database
+    @param player(sting): number of current player
+
     """
     print(RED + "\nSorry, this email is not registered.\n")
     selected_option = email_not_registered()
@@ -244,7 +252,7 @@ def input_correct_email(player):
         register_single_player(player)
 
 
-def email_not_registered():
+def email_not_registered() -> str:
     """
     Called when the email is not registered on the worksheet/database
     Give user an option to enter another email or create a new user
@@ -264,10 +272,11 @@ def email_not_registered():
     return selected_option
 
 
-def register_single_player(player_number):
+def register_single_player(player_number: str):
     """
     Register one player
     if they forgot their email address during the log-in step
+    @param player_number(string): number of player who's turn it is
     """
     time.sleep(1)
     print(BLUE + "Creating a new user for you...")
@@ -280,13 +289,13 @@ def register_single_player(player_number):
 def register_new_players():
     """
     Register new players
-    Ask players for an input and save first value in a variable.
+    Ask players for an input and save first value (name) in a variable
     It will be displayed in the game to indicate which player's move it is
     """
     global player1name
-    player1 = "Player1"  # It will first display that player1 has to input data
+    player1 = "Player1"  # It will first display that Player1 has to input data
     global player2name
-    player2 = "Player2"  # It will first display that player1 has to input data
+    player2 = "Player2"  # It will first display that Player2 has to input data
 
     time.sleep(1)
     print(BLUE + "Starting the registration...")
@@ -298,8 +307,8 @@ def register_new_players():
     update_players_worksheet(player_1_info)
     update_players_worksheet(player_2_info)
 
-    player1name = player_1_info[0]  # Update value of Player1 to player's name
-    player2name = player_2_info[0]  # Update value of Player2 to player's name
+    player1name = player_1_info[0]  # Update value of Player1 to input name
+    player2name = player_2_info[0]  # Update value of Player2 to input name
 
     separate_line()
     print(f"Thanks {player1name} & {player2name}," +
@@ -310,11 +319,12 @@ def register_new_players():
     separate_line()
 
 
-def create_new_players(player_number):
+def create_new_players(player_number: str) -> list:
     """
     Create a new player
     Get player's name and email
     Check if email is already in the database
+    @param player_number(string): number of the player who's turn it is
     """
     email_column = PLAYERS_WORKSHEET.col_values(2)
 
@@ -340,10 +350,11 @@ def create_new_players(player_number):
     return [player, player_email]
 
 
-def validate_username(player_name):
+def validate_username(player_name: str) -> bool:
     """
     Validation if the user name input meets the criteria
     It should be between 2 - 12 long using only A-Z
+    @param player_name(string): Player name as entered by user input
     """
     if len(player_name) < 2 or len(player_name) > 12:
         print(RED + "Player name must be between 2 - 12 characters long.")
@@ -356,18 +367,26 @@ def validate_username(player_name):
         return True
 
 
-def update_players_worksheet(data):
+def update_players_worksheet(data: list):
     """
     Update players worksheet
     Add a new row with data provided by both players
+    @param data(list): Player's name and email values
     """
     PLAYERS_WORKSHEET.append_row(data)
 
 
-def start_game_message(player1, player2):
+def start_game_message(player1name: str, player2name: str):
+    """
+    Displays welcome to the game message
+    Once players have logged in
+    @param player1(string): Player1's name
+    @param player2(string): Player2's name
+
+    """
     separate_line()
     print(GREEN + "Are you ready?")
-    print(RED + f"{player1}" + GREEN + " & " + YELLOW + f"{player2}")
+    print(RED + f"{player1name}" + GREEN + " & " + YELLOW + f"{player2name}")
     print(GREEN + "Let's play the game!")
     separate_line()
     time.sleep(2)
@@ -412,14 +431,14 @@ class Board():
             print(BLUE + f"   {row+1}  ", end="")
         print("\n")
 
-    def whos_move(self):
+    def whos_move(self) -> str:
         """
         Alternate moves between player 1 and 2
         """
         pieces = ['X', 'O']
         return pieces[self.moves % 2]
 
-    def move(self, column):
+    def move(self, column) -> bool:
         """
         Look for the first available slot in the column
         and place current player's piece in that space
@@ -442,7 +461,7 @@ class Board():
         print("Please choose another column.\n")
         return False
 
-    def winning_move(self):
+    def winning_move(self) -> bool:
         """
         Check for 4 pieces in a row
         either horizontally, vertically or diagonally
@@ -452,7 +471,7 @@ class Board():
         last_move = self.board[last_row][last_col]  # Either 'X' or 'O'
 
         # Check horizontal lines for win
-        def horizontal_win():
+        def horizontal_win() -> bool:
             for row in range(0, BOARD_HEIGHT):
                 # Subtracting 3 as impossible to connect 4 from [row, col > 3]
                 for col in range(0, (BOARD_WIDTH - 3)):
@@ -464,7 +483,7 @@ class Board():
             return False
 
         # Check vertical lines for win
-        def vertical_win():
+        def vertical_win() -> bool:
             # Subtracting 3 as impossible to connect 4 from [row < 3 , col]
             for row in range(0, (BOARD_HEIGHT-3)):
                 for col in range(0, BOARD_WIDTH):
@@ -476,7 +495,7 @@ class Board():
             return False
 
         # Check diagonal lines for win going up and to the right
-        def diagonal_win():
+        def diagonal_win() -> bool:
             for row in range(3, BOARD_HEIGHT):
                 # Possible to connect 4 starting at [row >= 3 & col =< 3]
                 for col in range(0, (BOARD_WIDTH-3)):
