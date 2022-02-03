@@ -21,15 +21,15 @@ The objective of the game is to be the first one to achieve a horizontal, vertic
 
 ### User Goals
 
-• Play a fun and easy game with other player
-• Read the rules of the game
-• Be able to log in to an existing account
+- Play a fun and easy game with other player
+- Read the rules of the game
+- Be able to log in to an existing account
 
 ### Site Owner Goals
 
-• Create a game that is easy and clear to user
-• Ensure that users understand the purpose of the game
-• Create a game that gives feedback to the user whilst playing
+- Create a game that is easy and clear to user
+- Ensure that users understand the purpose of the game
+- Create a game that gives feedback to the user whilst playing
 
 ## User Experience
 
@@ -39,10 +39,10 @@ There is no specific audience of this game. However, I would recommend that play
 
 ### User Requirements and Expectations
 
-• A simple, error-free game
-• Straightforward navigation
-• Game personalisation by entering players' names
-• Feedback on game results
+- A simple, error-free game
+- Straightforward navigation
+- Game personalisation by entering players' names
+- Feedback on game results
 
 ### User Manual
 
@@ -129,11 +129,25 @@ With the guit game option, the user exits the program with a goodbye message.
 
 ## User Stories
 
-### First time Users
+### Users
 
-### Returning Users
+1. I want to have clear options to select in the main menu
+2. I want to see an option to read the rules of the game
+3. I want to personalise the game and enter my name
+4. I want to be able to log-in if I return to the game
+5. I want to receive a real time feedback throughout the game
+6. I want to get a feedback when I win the game
+7. I want to be able to play multiple games when I'm logged in
+8. I want a random selection of the player to start a new game
 
 ### Site Owner
+
+9. I want users to have a positive experience whilst playing the game
+10. I want users to easily select options from the menu
+11. I want user names and emails to be saved to Google Spreadsheet
+12. I want the user to get feedback in case of wrong input
+13. I want data entry to be validated, to guide the user on how to correctly format the input
+
 
 ## Technical Design
 
