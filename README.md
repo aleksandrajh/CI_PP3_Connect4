@@ -148,11 +148,17 @@ With the guit game option, the user exits the program with a goodbye message.
 12. I want the user to get feedback in case of wrong input
 13. I want data entry to be validated, to guide the user on how to correctly format the input
 
-### [Back to Table of Content](## Table of Content)
+#### [Back to Table of Content](##Table of Content)
 
 ## Technical Design
 
 ### Flowchart
+
+The following flowchart summarises the structure and logic of the application.
+
+<details><summary>Flowchart</summary>
+<img src="docs/Connect4-flowchart.jpg">
+</details>
 
 ## Technologies Used
 
@@ -173,11 +179,10 @@ With the guit game option, the user exits the program with a goodbye message.
 - [Visual Studio Code (VSCode)](https://code.visualstudio.com/)
 VSCode was used to write the project code using Code Institute template
 
-
 ### Libraries
 
-- The [colorama](https://pypi.org/project/colorama/) module was used to add color to the terminal and enhance user experience
--[email_validator](https://pypi.org/project/email-validator/) - used to validate user email input
+- [colorama](https://pypi.org/project/colorama/) - used to add color to the terminal and enhance user experience
+- [email_validator](https://pypi.org/project/email-validator/) - used to validate user email input
 - [gspread](https://docs.gspread.org/en/latest/) - used to add and manipulate data in my Google spreadsheet and to interact with Google APIs
 - os - used to clear terminal
 - random - used to alternate first player to start the game
@@ -191,9 +196,7 @@ VSCode was used to write the project code using Code Institute template
 
 ## Testing user stories
 
-### First time user
-
-### Returning Users
+### User
 
 ### Site Owner
 
