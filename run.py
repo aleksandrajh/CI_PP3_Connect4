@@ -46,11 +46,11 @@ def separate_line():
 def main_menu() -> str:
     """
     The program will first show two possible options of the game
-    User can select to view the game rules or start the game
+    User can select to view game rules or start game
     """
     time.sleep(1)
     print(Col.GREEN + "What would you like to do?")
-    start_options = "1) View the game rules\n2) Play the game\n"
+    start_options = "1) View game rules\n2) Play game\n"
     start_option_selected = input(start_options)
     separate_line()
 
