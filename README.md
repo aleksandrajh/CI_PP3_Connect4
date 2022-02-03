@@ -148,6 +148,7 @@ With the guit game option, the user exits the program with a goodbye message.
 12. I want the user to get feedback in case of wrong input
 13. I want data entry to be validated, to guide the user on how to correctly format the input
 
+### [Back to Table of Content](## Table of Content)
 
 ## Technical Design
 
@@ -157,7 +158,31 @@ With the guit game option, the user exits the program with a goodbye message.
 
 ### Languages
 
-### Frameworks, Libraries & Tools
+- [Python](https://www.python.org/) programming language for the logic of the program
+
+### Frameworks & Tools
+
+- [Diagrams.net](https://app.diagrams.net/) was used to draw program flowchart
+- [Font Awesome](https://fontawesome.com/) - icons from Font Awesome were used in the footer below the program terminal
+- [Git](https://git-scm.com/) was used for version control within VSCode to push the code to GitHub
+- [GitHub](https://github.com/) was used as a remote repository to store project code
+- [Google Cloud Platform](https://cloud.google.com/cloud-console/) was used to manage access and permissions to the Google Services such as Google auth, sheets etc.
+- [Google Sheets](https://www.google.co.uk/sheets/about/) were used to store players details
+- [Heroku Platform](https://dashboard.heroku.com/) was used to deploy the project into live environment
+- [PEP8](http://pep8online.com/) was used to check my code against Python conventions
+- [Visual Studio Code (VSCode)](https://code.visualstudio.com/)
+VSCode was used to write the project code using Code Institute template
+
+
+### Libraries
+
+- The [colorama](https://pypi.org/project/colorama/) module was used to add color to the terminal and enhance user experience
+-[email_validator](https://pypi.org/project/email-validator/) - used to validate user email input
+- [gspread](https://docs.gspread.org/en/latest/) - used to add and manipulate data in my Google spreadsheet and to interact with Google APIs
+- os - used to clear terminal
+- random - used to alternate first player to start the game
+- sys & sleep - used to create a typing effect within the games rules
+- time - used to displayed delayed messages in the terminal
 
 
 ## Features
