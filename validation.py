@@ -2,7 +2,7 @@ import time
 import gspread
 from google.oauth2.service_account import Credentials
 from email_validator import validate_email, EmailNotValidError
-from colors import Color
+from colors import Color as Col
 from run import run_game, cls, separate_line
 
 
@@ -32,7 +32,8 @@ def log_in_players(players):
     By input their email address which is saved in the 2 row of the spreadsheet
     Their names are retrieved from the first row
     """
-    print(Color.GREEN + "Welcome back! Please help me verify your login details.")
+    print(Col.GREEN + "Welcome back! " +
+          "Please help me verify your login details.")
 
     global player1name
     global player2name
@@ -46,10 +47,10 @@ def log_in_players(players):
                 email_row = PLAYERS_WORKSHEET.find(email).row
                 if i == 0:
                     player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-                    print(Color.BLUE + f"\nHello {player1name}!\n")
+                    print(Col.BLUE + f"\nHello {player1name}!\n")
                 elif i == 1:
                     player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-                    print(Color.BLUE + f"\nHello {player2name}!\n")
+                    print(Col.BLUE + f"\nHello {player2name}!\n")
                 break
 
             else:
@@ -84,8 +85,8 @@ def validate_user_email(email: str):
         return True
 
     except EmailNotValidError as e:
-        print(Color.RED + "\n" + str(e))
-        print(Color.RED + "Please try again.\n")
+        print(Col.RED + "\n" + str(e))
+        print(Col.RED + "Please try again.\n")
 
 
 def is_player_registered(email: str) -> bool:
@@ -109,7 +110,7 @@ def input_correct_email(player: str):
     @param player(sting): number of current player
 
     """
-    print(Color.RED + "\nSorry, this email is not registered.\n")
+    print(Col.RED + "\nSorry, this email is not registered.\n")
     selected_option = email_not_registered()
 
     if selected_option == "1":
@@ -125,7 +126,7 @@ def email_not_registered() -> str:
     Give user an option to enter another email or create a new user
     """
     time.sleep(1)
-    print(Color.GREEN + "Would you like to:")
+    print(Col.GREEN + "Would you like to:")
     options = "1) Try another email\n2) Create a new player\n"
     selected_option = input(options)
     separate_line()
@@ -146,7 +147,7 @@ def register_single_player(player_number: str):
     @param player_number(string): number of player who's turn it is
     """
     time.sleep(1)
-    print(Color.BLUE + "Creating a new user for you...")
+    print(Col.BLUE + "Creating a new user for you...")
     print(" ")
     new_player = player_number
     player_info = create_new_players(new_player)
@@ -163,7 +164,7 @@ def register_new_players(players):
     global player2name
 
     time.sleep(1)
-    print(Color.BLUE + "Starting the registration...")
+    print(Col.BLUE + "Starting the registration...")
     print(" ")
 
     while True:
@@ -208,12 +209,12 @@ def create_new_players(player_number: str) -> list:
 
         # Verify if email is already in use
         if player_email not in email_column:
-            print(Color.BLUE + "\nThank you!\n")
+            print(Col.BLUE + "\nThank you!\n")
             break
 
         else:
-            print(Color.RED + f"\nSorry {player}, this email is already used.")
-            print(Color.RED + "Please try another email.\n")
+            print(Col.RED + f"\nSorry {player}, this email is already used.")
+            print(Col.RED + "Please try another email.\n")
 
     return [player, player_email]
 
@@ -225,11 +226,12 @@ def validate_username(player_name: str) -> bool:
     @param player_name(string): Player name as entered by user input
     """
     if len(player_name) < 2 or len(player_name) > 12:
-        print(Color.RED + "Player name must be between 2 - 12 characters long.")
-        print(Color.RED + "Please try again.\n")
+        print(Col.RED + "Player name must be between 2 - 12 characters long.")
+        print(Col.RED + "Please try again.\n")
 
     elif not player_name.isalpha():
-        print(Color.RED + "Player name must only contain A-Z. Please try again.\n")
+        print(Col.RED + "Player name must only contain A-Z." +
+              "Please try again.\n")
 
     else:
         return True
@@ -253,9 +255,10 @@ def start_game_message(player1name: str, player2name: str):
 
     """
     separate_line()
-    print(Color.GREEN + "Are you ready?")
-    print(Color.RED + f"{player1name}" + Color.GREEN + " & " + Color.YELLOW + f"{player2name}")
-    print(Color.GREEN + "Let's play the game!")
+    print(Col.GREEN + "Are you ready?")
+    print(Col.RED + f"{player1name}" + Col.GREEN +
+          " & " + Col.YELLOW + f"{player2name}")
+    print(Col.GREEN + "Let's play the game!")
     separate_line()
     time.sleep(2)
     cls()

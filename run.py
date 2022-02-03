@@ -3,7 +3,7 @@ import time
 from time import sleep
 import os
 import random
-from colors import Color
+from colors import Color as Col
 import validation as val
 
 
@@ -11,17 +11,17 @@ def logo():
     """
     Display game name
     """
-    print(Color.BLUE + "Welcome to:")
+    print(Col.BLUE + "Welcome to:")
     print(" ")
-    print(Color.LOGO_Y + "  ____                                   _       ___ ")
-    print(Color.LOGO_Y + " / __ \                                 | |     /   |")
-    print(Color.LOGO_Y + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
-    print(Color.LOGO_R + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
-    print(Color.LOGO_R + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
-    print(Color.LOGO_Y + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
+    print(Col.LOGO_Y + "  ____                                   _       ___ ")
+    print(Col.LOGO_Y + " / __ \                                 | |     /   |")
+    print(Col.LOGO_Y + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
+    print(Col.LOGO_R + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
+    print(Col.LOGO_R + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
+    print(Col.LOGO_Y + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
     print(" ")
     print(" ")
-    print(Color.BLUE + "                                        for 2 players")
+    print(Col.BLUE + "                                        for 2 players")
     print(" ")
     print(" ")
     time.sleep(1)
@@ -49,14 +49,14 @@ def main_menu() -> str:
     User can select to view the game rules or start the game
     """
     time.sleep(1)
-    print(Color.GREEN + "What would you like to do?")
+    print(Col.GREEN + "What would you like to do?")
     start_options = "1) View the game rules\n2) Play the game\n"
     start_option_selected = input(start_options)
     separate_line()
 
     # Validate if answer is either 1 or 2
     while start_option_selected not in ("1", "2"):
-        print(Color.GREEN + "Please choose between one of the two options:")
+        print(Col.GREEN + "Please choose between one of the two options:")
         start_option_selected = input(start_options)
         separate_line()
 
@@ -76,7 +76,7 @@ def game_rules():
     Display game rules
     which user can exit by entering any key
     """
-    print(Color.BLUE + "\u0332".join("Game Rules:"))
+    print(Col.BLUE + "\u0332".join("Game Rules:"))
     print("The objective of the game is to be the first one to put four " +
           "of your pieces")
     time.sleep(1)
@@ -106,14 +106,14 @@ def start_game() -> str:
     The program will check if users have played the game before
     """
     time.sleep(1)
-    print(Color.GREEN + "Have you played before?")
+    print(Col.GREEN + "Have you played before?")
     answer = "1) Yes \n2) No\n"
     answered = input(answer)
     separate_line()
 
     # Validate if answer is either 1 or 2
     while answered not in ("1", "y", "2", "n"):
-        print(Color.GREEN + "Please choose between one of the two options:")
+        print(Col.GREEN + "Please choose between one of the two options:")
         answered = input(answer)
 
         separate_line()
@@ -149,16 +149,16 @@ class Board():
         """
         print(" ")
         for row in range(0, BOARD_HEIGHT):
-            print(Color.BLUE + '|', end="")
+            print(Col.BLUE + '|', end="")
             for col in range(0, BOARD_WIDTH):
-                print(f"  {self.board[row][col]}" + Color.BLUE + "  |", end="")
+                print(f"  {self.board[row][col]}" + Col.BLUE + "  |", end="")
             print("\n")
 
-        print(Color.BLUE + " -"*21)
+        print(Col.BLUE + " -"*21)
 
         # Display number of columns on the board
         for row in range(BOARD_WIDTH):
-            print(Color.BLUE + f"   {row+1}  ", end="")
+            print(Col.BLUE + f"   {row+1}  ", end="")
         print("\n")
 
     def whos_move(self) -> str:
@@ -178,16 +178,16 @@ class Board():
             if self.board[row][column] == ' ':
                 # Display pieces in different colors on the board
                 if self.whos_move() == 'X':
-                    self.board[row][column] = Color.RED + self.whos_move()
+                    self.board[row][column] = Col.RED + self.whos_move()
                 else:
-                    self.board[row][column] = Color.YELLOW + self.whos_move()
+                    self.board[row][column] = Col.YELLOW + self.whos_move()
 
                 self.last_move = [row, column]
                 self.moves += 1
                 return True
 
         # If there is no available space in the column
-        print(Color.RED + "You cannot put a piece in the full column.")
+        print(Col.RED + "You cannot put a piece in the full column.")
         print("Please choose another column.\n")
         return False
 
@@ -250,11 +250,11 @@ class Board():
         if horizontal_win() or vertical_win() or diagonal_win():
             cls()
             self.display_board()
-            if last_move == Color.RED + 'X':
-                print(Color.GREEN + "\n----> " +
+            if last_move == Col.RED + 'X':
+                print(Col.GREEN + "\n----> " +
                       f"{val.player1name.upper()}" + " is the winner <----\n")
             else:
-                print(Color.GREEN + "\n----> " +
+                print(Col.GREEN + "\n----> " +
                       f"{val.player2name.upper()}" + " is the winner <----\n")
 
             time.sleep(2)
@@ -281,17 +281,19 @@ def run_game():
 
         while not is_move_valid:
             if game.whos_move() == 'X':
-                print(f"{val.player1name}'s move. You play with " + Color.RED + "X")
+                print(f"{val.player1name}'s move. " +
+                       "You play with " + Col.RED + "X")
                 player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
             else:
-                print(f"{val.player2name}'s move. You play with " + Color.YELLOW + "O")
+                print(f"{val.player2name}'s move. " +
+                      "You play with " + Col.YELLOW + "O")
                 player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
 
             # if player types invalid input
             try:
                 is_move_valid = game.move(int(player_move)-1)
             except:
-                print(Color.RED + f"Please choose a column 1 - {BOARD_WIDTH}.\n")
+                print(Col.RED + f"Please choose a column 1 - {BOARD_WIDTH}.\n")
 
         # The game is over when the last move connects 4 pieces
         game_won = game.winning_move()
@@ -300,7 +302,7 @@ def run_game():
         if game.moves == BOARD_HEIGHT * BOARD_WIDTH:
             cls()
             game.display_board()
-            print(Color.GREEN + "\n----> The game is over - it's a tie! <----\n")
+            print(Col.GREEN + "\n----> The game is over - it's a tie! <----\n")
 
             time.sleep(2)
             separate_line()
@@ -312,20 +314,20 @@ def play_again():
     Give players an option to carry on playing with same players names
     go back to the main menu or exit the game
     """
-    print(Color.GREEN + "What would you like to do:")
+    print(Col.GREEN + "What would you like to do:")
     options = "1) Play again\n2) Go to main menu\n3) Quit game\n"
     selected = input(options)
     separate_line()
 
     # Validate if answer is either 1 or 2 or 3
     while selected not in ("1", "2", "3"):
-        print(Color.GREEN + "Please choose between one of below options:")
+        print(Col.GREEN + "Please choose between one of below options:")
         selected = input(options)
 
         separate_line()
 
     if selected == "1":
-        print(Color.BLUE + "Starting a new game for " +
+        print(Col.BLUE + "Starting a new game for " +
               f"{val.player1name} & {val.player2name}!\n")
         time.sleep(2)
         run_game()
@@ -336,7 +338,7 @@ def play_again():
         main()
 
     elif selected == "3":
-        print(Color.BLUE + "Thanks for playing! See you soon!\n")
+        print(Col.BLUE + "Thanks for playing! See you soon!\n")
         sys.exit()
 
 
