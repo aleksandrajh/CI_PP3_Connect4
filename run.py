@@ -1,59 +1,46 @@
 import sys
 import time
 from time import sleep
-import gspread
-from google.oauth2.service_account import Credentials
-from email_validator import validate_email, EmailNotValidError
-from colorama import init
 import os
 import random
-
-# Initializes Colorama
-init(autoreset=True)
-
-# Scope and constant vars defined as in love_sandwiches walk-through project
-# by Code Institute
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-
-# My updated values
-SHEET = GSPREAD_CLIENT.open('connect4_database')
-PLAYERS_WORKSHEET = SHEET.worksheet("Players")
-
-# Text colors
-YELLOW = "\033[1;33;48m"
-RED = "\033[1;31;48m"
-GREEN = "\033[1;32;48m"
-BLUE = "\033[1;34;48m"
-LOGO_Y = "\033[0;33;48m"
-LOGO_R = "\033[0;31;48m"
+from colors import Color
+import validation as val
 
 
 def logo():
     """
     Display game name
     """
-    print(BLUE + "Welcome to:")
+    print(Color.BLUE + "Welcome to:")
     print(" ")
-    print(LOGO_Y + "  ____                                   _       ___ ")
-    print(LOGO_Y + " / __ \                                 | |     /   |")
-    print(LOGO_Y + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
-    print(LOGO_R + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
-    print(LOGO_R + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
-    print(LOGO_Y + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
+    print(Color.LOGO_Y + "  ____                                   _       ___ ")
+    print(Color.LOGO_Y + " / __ \                                 | |     /   |")
+    print(Color.LOGO_Y + "| /  \/  ___   _ __   _ __    ___   ___ | |_   / /| |")
+    print(Color.LOGO_R + "| |     / _ \ |  _ \ |  _ \  / _ \ / __|| __| / /_| |")
+    print(Color.LOGO_R + "| \__/\| (_) || | | || | | ||  __/| (__ | |_  \___  |")
+    print(Color.LOGO_Y + " \____/ \___/ |_| |_||_| |_| \___| \___| \__|     |_|")
     print(" ")
     print(" ")
-    print(BLUE + "                                        for 2 players")
+    print(Color.BLUE + "                                        for 2 players")
     print(" ")
     print(" ")
     time.sleep(1)
+
+
+def cls():
+    """
+    Clear the console
+    """
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+def separate_line():
+    """
+    Print '-' lines to separate messages
+    """
+    print(" ")
+    print("- "*30)
+    print(" ")
 
 
 def main_menu() -> str:
@@ -62,14 +49,14 @@ def main_menu() -> str:
     User can select to view the game rules or start the game
     """
     time.sleep(1)
-    print(GREEN + "What would you like to do?")
+    print(Color.GREEN + "What would you like to do?")
     start_options = "1) View the game rules\n2) Play the game\n"
     start_option_selected = input(start_options)
     separate_line()
 
     # Validate if answer is either 1 or 2
     while start_option_selected not in ("1", "2"):
-        print(GREEN + "Please choose between one of the two options:")
+        print(Color.GREEN + "Please choose between one of the two options:")
         start_option_selected = input(start_options)
         separate_line()
 
@@ -89,7 +76,7 @@ def game_rules():
     Display game rules
     which user can exit by entering any key
     """
-    print(BLUE + "\u0332".join("Game Rules:"))
+    print(Color.BLUE + "\u0332".join("Game Rules:"))
     print("The objective of the game is to be the first one to put four " +
           "of your pieces")
     time.sleep(1)
@@ -119,14 +106,14 @@ def start_game() -> str:
     The program will check if users have played the game before
     """
     time.sleep(1)
-    print(GREEN + "Have you played before?")
+    print(Color.GREEN + "Have you played before?")
     answer = "1) Yes \n2) No\n"
     answered = input(answer)
     separate_line()
 
     # Validate if answer is either 1 or 2
     while answered not in ("1", "y", "2", "n"):
-        print(GREEN + "Please choose between one of the two options:")
+        print(Color.GREEN + "Please choose between one of the two options:")
         answered = input(answer)
 
         separate_line()
@@ -134,270 +121,14 @@ def start_game() -> str:
     if answered == "1" or answered == "y":
         cls()
         logo()
-        log_in_players(players)
+        val.log_in_players(val.players)
 
     elif answered == "2" or answered == "n":
         cls()
         logo()
-        register_new_players(players)
+        val.register_new_players(val.players)
 
     return answered
-
-
-def separate_line():
-    """
-    Print '-' lines to separate messages
-    """
-    print(" ")
-    print("- "*30)
-    print(" ")
-
-
-
-players = ["Player1", "Player2"]
-
-
-def log_in_players(players):
-    """
-    User can log in to existing account
-    By input their email address which is saved in the 2 row of the spreadsheet
-    Their names are retrieved from the first row
-    """
-    print(GREEN + "Welcome back! Please help me verify your login details.")
-
-    global player1name
-    global player2name
-
-    for i, player in enumerate(players):
-        while True:
-            email = get_email(player)
-            existing_player = is_player_registered(email)
-
-            if existing_player:
-                email_row = PLAYERS_WORKSHEET.find(email).row
-                if i == 0:
-                    player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-                    print(BLUE + f"\nHello {player1name}!\n")
-                elif i == 1:
-                    player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
-                    print(BLUE + f"\nHello {player2name}!\n")
-                break
-
-            else:
-                input_correct_email(player)
-
-    time.sleep(2)
-    start_game_message(player1name, player2name)
-
-
-def get_email(playername: str) -> str:
-    """
-    Ask user to input their email address
-    @param playername(string): Player's number
-    """
-    while True:
-        email = input(f"{playername} - what's your email address?\n").strip()
-
-        if validate_user_email(email):
-            break
-
-    return email
-
-
-def validate_user_email(email: str):
-    """
-    Validate the email address.
-    It must be of the form name@example.com
-    @param email(string): Player's email address
-    """
-    try:
-        validate_email(email)
-        return True
-
-    except EmailNotValidError as e:
-        print(RED + "\n" + str(e))
-        print(RED + "Please try again.\n")
-
-
-def is_player_registered(email: str) -> bool:
-    """
-    Verify if the player is registered
-    by checking if email exists in the database
-    @param email(string): Player's email address
-    """
-    email_column = PLAYERS_WORKSHEET.col_values(2)
-
-    if email in email_column:
-        return True
-    else:
-        return False
-
-
-def input_correct_email(player: str):
-    """
-    Asks players to input their email again
-    if the email was not found in the database
-    @param player(sting): number of current player
-
-    """
-    print(RED + "\nSorry, this email is not registered.\n")
-    selected_option = email_not_registered()
-
-    if selected_option == "1":
-        print("Please write your email again:")
-
-    elif selected_option == "2":
-        register_single_player(player)
-
-
-def email_not_registered() -> str:
-    """
-    Called when the email is not registered on the worksheet/database
-    Give user an option to enter another email or create a new user
-    """
-    time.sleep(1)
-    print(GREEN + "Would you like to:")
-    options = "1) Try another email\n2) Create a new player\n"
-    selected_option = input(options)
-    separate_line()
-
-    while selected_option not in ("1", "2"):
-        print("Please choose between one of the options:")
-        selected_option = input(options)
-
-        separate_line()
-
-    return selected_option
-
-
-def register_single_player(player_number: str):
-    """
-    Register one player
-    if they forgot their email address during the log-in step
-    @param player_number(string): number of player who's turn it is
-    """
-    time.sleep(1)
-    print(BLUE + "Creating a new user for you...")
-    print(" ")
-    new_player = player_number
-    player_info = create_new_players(new_player)
-    update_players_worksheet(player_info)  # Log data of one player on database
-
-
-def register_new_players(players):
-    """
-    Register new players
-    Ask players for an input and save first value (name) in a variable
-    It will be displayed in the game to indicate which player's move it is
-    """
-    global player1name
-    global player2name
-
-    time.sleep(1)
-    print(BLUE + "Starting the registration...")
-    print(" ")
-
-    while True:
-        for i, player in enumerate(players):
-            if i == 0:
-                player_1_info = create_new_players(player)
-                update_players_worksheet(player_1_info)
-                player1name = player_1_info[0]
-            elif i == 1:
-                player_2_info = create_new_players(player)
-                update_players_worksheet(player_2_info)
-                player2name = player_2_info[0]
-        break
-
-    separate_line()
-    print(f"Thanks {player1name} & {player2name}, " +
-           "your details have been registered!\n")
-
-    time.sleep(2)
-    start_game_message(player1name, player2name)
-    separate_line()
-
-
-def create_new_players(player_number: str) -> list:
-    """
-    Create a new player
-    Get player's name and email
-    Check if email is already in the database
-    @param player_number(string): number of the player who's turn it is
-    """
-    email_column = PLAYERS_WORKSHEET.col_values(2)
-
-    while True:
-        player = input(f"{player_number} - what's your name?\n")
-        print(" ")
-
-        if validate_username(player):
-            break
-
-    while True:
-        player_email = get_email(player)
-
-        # Verify if email is already in use
-        if player_email not in email_column:
-            print(BLUE + "\nThank you!\n")
-            break
-
-        else:
-            print(RED + f"\nSorry {player}, this email is already used.")
-            print(RED + "Please try another email.\n")
-
-    return [player, player_email]
-
-
-def validate_username(player_name: str) -> bool:
-    """
-    Validation if the user name input meets the criteria
-    It should be between 2 - 12 long using only A-Z
-    @param player_name(string): Player name as entered by user input
-    """
-    if len(player_name) < 2 or len(player_name) > 12:
-        print(RED + "Player name must be between 2 - 12 characters long.")
-        print(RED + "Please try again.\n")
-
-    elif not player_name.isalpha():
-        print(RED + "Player name must only contain A-Z. Please try again.\n")
-
-    else:
-        return True
-
-
-def update_players_worksheet(data: list):
-    """
-    Update players worksheet
-    Add a new row with data provided by both players
-    @param data(list): Player's name and email values
-    """
-    PLAYERS_WORKSHEET.append_row(data)
-
-
-def start_game_message(player1name: str, player2name: str):
-    """
-    Displays welcome to the game message
-    Once players have logged in
-    @param player1(string): Player1's name
-    @param player2(string): Player2's name
-
-    """
-    separate_line()
-    print(GREEN + "Are you ready?")
-    print(RED + f"{player1name}" + GREEN + " & " + YELLOW + f"{player2name}")
-    print(GREEN + "Let's play the game!")
-    separate_line()
-    time.sleep(2)
-    cls()
-    run_game()
-
-
-def cls():
-    """
-    Clear the console
-    """
-    os.system("cls" if os.name == "nt" else "clear")
 
 
 BOARD_WIDTH = 7
@@ -418,16 +149,16 @@ class Board():
         """
         print(" ")
         for row in range(0, BOARD_HEIGHT):
-            print(BLUE + '|', end="")
+            print(Color.BLUE + '|', end="")
             for col in range(0, BOARD_WIDTH):
-                print(f"  {self.board[row][col]}" + BLUE + "  |", end="")
+                print(f"  {self.board[row][col]}" + Color.BLUE + "  |", end="")
             print("\n")
 
-        print(BLUE + " -"*21)
+        print(Color.BLUE + " -"*21)
 
         # Display number of columns on the board
         for row in range(BOARD_WIDTH):
-            print(BLUE + f"   {row+1}  ", end="")
+            print(Color.BLUE + f"   {row+1}  ", end="")
         print("\n")
 
     def whos_move(self) -> str:
@@ -447,16 +178,16 @@ class Board():
             if self.board[row][column] == ' ':
                 # Display pieces in different colors on the board
                 if self.whos_move() == 'X':
-                    self.board[row][column] = RED + self.whos_move()
+                    self.board[row][column] = Color.RED + self.whos_move()
                 else:
-                    self.board[row][column] = YELLOW + self.whos_move()
+                    self.board[row][column] = Color.YELLOW + self.whos_move()
 
                 self.last_move = [row, column]
                 self.moves += 1
                 return True
 
         # If there is no available space in the column
-        print(RED + "You cannot put a piece in the full column.")
+        print(Color.RED + "You cannot put a piece in the full column.")
         print("Please choose another column.\n")
         return False
 
@@ -519,12 +250,12 @@ class Board():
         if horizontal_win() or vertical_win() or diagonal_win():
             cls()
             self.display_board()
-            if last_move == RED + 'X':
-                print(GREEN + "\n----> " +
-                      f"{player1name.upper()}" + " is the winner <----\n")
+            if last_move == Color.RED + 'X':
+                print(Color.GREEN + "\n----> " +
+                      f"{val.player1name.upper()}" + " is the winner <----\n")
             else:
-                print(GREEN + "\n----> " +
-                      f"{player2name.upper()}" + " is the winner <----\n")
+                print(Color.GREEN + "\n----> " +
+                      f"{val.player2name.upper()}" + " is the winner <----\n")
 
             time.sleep(2)
             separate_line()
@@ -550,17 +281,17 @@ def run_game():
 
         while not is_move_valid:
             if game.whos_move() == 'X':
-                print(f"{player1name}'s move. You play with " + RED + "X")
+                print(f"{val.player1name}'s move. You play with " + Color.RED + "X")
                 player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
             else:
-                print(f"{player2name}'s move. You play with " + YELLOW + "O")
+                print(f"{val.player2name}'s move. You play with " + Color.YELLOW + "O")
                 player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
 
             # if player types invalid input
             try:
                 is_move_valid = game.move(int(player_move)-1)
             except:
-                print(RED + f"Please choose a column 1 - {BOARD_WIDTH}.\n")
+                print(Color.RED + f"Please choose a column 1 - {BOARD_WIDTH}.\n")
 
         # The game is over when the last move connects 4 pieces
         game_won = game.winning_move()
@@ -569,7 +300,7 @@ def run_game():
         if game.moves == BOARD_HEIGHT * BOARD_WIDTH:
             cls()
             game.display_board()
-            print(GREEN + "\n----> The game is over - it's a tie! <----\n")
+            print(Color.GREEN + "\n----> The game is over - it's a tie! <----\n")
 
             time.sleep(2)
             separate_line()
@@ -581,21 +312,21 @@ def play_again():
     Give players an option to carry on playing with same players names
     go back to the main menu or exit the game
     """
-    print(GREEN + "What would you like to do:")
+    print(Color.GREEN + "What would you like to do:")
     options = "1) Play again\n2) Go to main menu\n3) Quit game\n"
     selected = input(options)
     separate_line()
 
     # Validate if answer is either 1 or 2 or 3
     while selected not in ("1", "2", "3"):
-        print(GREEN + "Please choose between one of below options:")
+        print(Color.GREEN + "Please choose between one of below options:")
         selected = input(options)
 
         separate_line()
 
     if selected == "1":
-        print(BLUE + "Starting a new game for " +
-              f"{player1name} & {player2name}!\n")
+        print(Color.BLUE + "Starting a new game for " +
+              f"{val.player1name} & {val.player2name}!\n")
         time.sleep(2)
         run_game()
 
@@ -605,7 +336,7 @@ def play_again():
         main()
 
     elif selected == "3":
-        print(BLUE + "Thanks for playing! See you soon!\n")
+        print(Color.BLUE + "Thanks for playing! See you soon!\n")
         sys.exit()
 
 
