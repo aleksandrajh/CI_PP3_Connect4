@@ -3,6 +3,7 @@ from colorama import init
 # Initializes Colorama
 init(autoreset=True)
 
+
 class Color:
     YELLOW = "\033[1;33;48m"
     RED = "\033[1;31;48m"
