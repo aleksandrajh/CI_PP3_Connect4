@@ -1,10 +1,7 @@
-import sys
 import time
-from time import sleep
 import gspread
 from google.oauth2.service_account import Credentials
 from email_validator import validate_email, EmailNotValidError
-import os
 from colors import Color
 from run import run_game, cls, separate_line
 
