@@ -386,7 +386,7 @@ VSCode was used to write the project code using Code Institute template
 | Main menu | Select option 2 | Users are asked if they played the game before | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-1.JPG">
+<img src="docs/testing/user-story-1.jpg">
 </details>
 
 
@@ -397,7 +397,7 @@ VSCode was used to write the project code using Code Institute template
 | Main menu | Select option 1 | Users are presented with game rules | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-2.JPG">
+<img src="docs/testing/user-story-2.jpg">
 </details>
 
 
@@ -409,10 +409,10 @@ VSCode was used to write the project code using Code Institute template
 | Play game options | Select option 2 (sign-up) | Users are asked to input their names, once validated the names are saved and greeting message displayed. Names are displayed during the game | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-3-a.JPG">
+<img src="docs/testing/user-story-3-a.jpg">
 </details>
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-3-b.JPG">
+<img src="docs/testing/user-story-3-b.jpg">
 </details>
 
 
@@ -423,7 +423,7 @@ VSCode was used to write the project code using Code Institute template
 | Play game options | Select option 1 (log-in) | Returning users are asked to input the email address they registered before and once validated, a greeting message with their name is displayed | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-4.JPG">
+<img src="docs/testing/user-story-4.jpg">
 </details>
 
 
@@ -460,7 +460,7 @@ VSCode was used to write the project code using Code Institute template
 | Finished Game options | User selects play again option  | The game restarts for the same players | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-7.JPG">
+<img src="docs/testing/user-story-7.jpg">
 </details>
 
 
@@ -496,9 +496,9 @@ VSCode was used to write the project code using Code Institute template
 | Across all screen | User inputs invalid numeric value | Users are asked to try again between available options from the menu | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-10-a.JPG">
-<img src="docs/testing/user-story-10-b.JPG">
-<img src="docs/testing/user-story-10-c.JPG">
+<img src="docs/testing/user-story-10-a.jpg">
+<img src="docs/testing/user-story-10-b.jpg">
+<img src="docs/testing/user-story-10-c.jpg">
 </details>
 
 
@@ -509,7 +509,7 @@ VSCode was used to write the project code using Code Institute template
 | Log-in | Both users input their names and email address which has not been previously registered  | Username and email addresses are saved to Google Spreadsheet to the next available rows in columns 1 & 2 respectively | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-11.JPG">
+<img src="docs/testing/user-story-11.jpg">
 </details>
 
 
@@ -520,8 +520,8 @@ VSCode was used to write the project code using Code Institute template
 | Across all screen | User inputs invalid numeric value in the menu or game. User inputs invalid value during log-in or sign-up | Feedback message displayed to the user | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-12-a.JPG">
-<img src="docs/testing/user-story-12-b.JPG">
+<img src="docs/testing/user-story-12-a.jpg">
+<img src="docs/testing/user-story-12-b.jpg">
 </details>
 
 
@@ -532,8 +532,8 @@ VSCode was used to write the project code using Code Institute template
 | Across all screen | User inputs invalid data | Feedback message with instructions diplayed to the user | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-13-a.JPG">
-<img src="docs/testing/user-story-13-b.JPG">
+<img src="docs/testing/user-story-13-a.jpg">
+<img src="docs/testing/user-story-13-b.jpg">
 </details>
 
 
