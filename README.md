@@ -378,9 +378,80 @@ VSCode was used to write the project code using Code Institute template
 
 ## Testing user stories
 
-### User
+1. I want to have clear options to select in the main menu
 
-### Site Owner
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Main menu | Select option 1 | Users are presented with game rules | Works as expected |
+| Main menu | Select option 2 | Users are asked if they played the game before | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-1.png">
+</details>
+
+
+2. I want to be able to read the rules of the game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Main menu | Select option 1 | Users are presented with game rules | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-2.png">
+</details>
+
+
+3. I want to personalise the game and enter my name
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Play game options | Select option 1 (log-in) | Users are asked to input their email addresses, and once validated, a greeting message with their name is displayed. Names are displayed during the game | Works as expected |
+| Play game options | Select option 2 (sign-up) | Users are asked to input their names, once validated the names are saved and greeting message displayed. Names are displayed during the game | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-3-a.png">
+</details>
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-3-b.png">
+</details>
+
+
+4. I want to be able to log-in if I return to the game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Play game options | Select option 1 (log-in) | Returning users are asked to input the email address they registered before and once validated, a greeting message with their name is displayed | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-4.png">
+</details>
+
+
+5. I want to receive a real time feedback throughout the game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| User Input Validation & Feedback through game play | Players will be informed if their input is invalid | Error messages displayed | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-5-a.JPG">
+<img src="docs/testing/user-story-5-b.JPG">
+<img src="docs/testing/user-story-5-c.JPG">
+<img src="docs/testing/user-story-5-d.JPG">
+</details>
+
+
+6. I want to get a feedback when I win the game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Game screen | Player has connected 4 pieces in a row | Message is displayed with the winning player's name | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-6-a.JPG">
+<img src="docs/testing/user-story-6-b.JPG">
+</details>
+
 
 ## Bugs
 
