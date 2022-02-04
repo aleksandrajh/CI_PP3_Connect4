@@ -31,6 +31,7 @@ The objective of the game is to be the first one to achieve a horizontal, vertic
 - Ensure that users understand the purpose of the game
 - Create a game that gives feedback to the user whilst playing
 
+
 ## User Experience
 
 ### Target Audience
@@ -127,6 +128,7 @@ With the guit game option, the user exits the program with a goodbye message.
 
 </details>
 
+
 ## User Stories
 
 ### Users
@@ -150,6 +152,7 @@ With the guit game option, the user exits the program with a goodbye message.
 
 #### [Back to Table of Content](##Table of Content)
 
+
 ## Technical Design
 
 ### Flowchart
@@ -159,6 +162,7 @@ The following flowchart summarises the structure and logic of the application.
 <details><summary>Flowchart</summary>
 <img src="docs/Connect4-flowchart.jpg">
 </details>
+
 
 ## Technologies Used
 
@@ -204,8 +208,6 @@ VSCode was used to write the project code using Code Institute template
 ![Main menu](docs/features/main-menu.JPG)
 </details>
 
-
-
 ### Game rules
 - Displays clear game rules
 - Allows user to return to the main menu once read
@@ -217,7 +219,6 @@ VSCode was used to write the project code using Code Institute template
 ![Game rules](docs/features/game-rules.JPG)
 </details>
 
-
 ### Play options
 - Gives players options to either log in or create a new user
 - User stories covered: 4
@@ -227,7 +228,6 @@ VSCode was used to write the project code using Code Institute template
 
 ![Play options](docs/features/play-options.JPG)
 </details>
-
 
 ### Log-in
 - Asks users for their email addresses
@@ -248,7 +248,6 @@ VSCode was used to write the project code using Code Institute template
 ![Log-in wrong email](docs/features/log-in-wrong-email.JPG)
 </details>
 
-
 ### Sign-up
 - Asks user for their name and email address
 - Validates user input values
@@ -268,7 +267,6 @@ VSCode was used to write the project code using Code Institute template
 ![Sign-up wrong email](docs/features/sign-up-wrong-email.JPG)
 </details>
 
-
 ### Users greeting
 - Displays a greeting message to the user once logged in
 - User stories covered: 3, 9
@@ -278,7 +276,6 @@ VSCode was used to write the project code using Code Institute template
 
 ![User greeting](docs/features/user-greeting.JPG)
 </details>
-
 
 ### Game
 - Displays the name of currect player
@@ -305,7 +302,6 @@ VSCode was used to write the project code using Code Institute template
 
 ![Winner Message](docs/features/game-screen-winner-message.JPG)
 </details>
-
 
 ### Finished Game options
 
@@ -360,6 +356,7 @@ VSCode was used to write the project code using Code Institute template
 ![Moves validation](docs/features/game-screen-move-validation.JPG)
 </details>
 
+
 ## Validation
 
 [PEP8 Validation Service](http://pep8online.com/) was used to check the code for PEP8 requirements. All the code passes with no errors and no warnings to show.
@@ -375,6 +372,7 @@ VSCode was used to write the project code using Code Institute template
 <details><summary>PEP3 check for colors.py</summary>
 <img src="docs/validation/pep8-validation-colors.JPG">
 </details>
+
 
 ## Testing user stories
 
@@ -581,6 +579,7 @@ This application has been deployed from GitHub to Heroku by following the steps:
 6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
 7. Press Enter to create your local clone
 
+
 ## Credits
 
 ### Images
@@ -601,6 +600,9 @@ This application has been deployed from GitHub to Heroku by following the steps:
 <img src="docs/winning-move- logic-schemat.jpg">
 </details>
 
-## Future Features
 
 ## Acknowledgements
+I would like to thank everyone who supported me in the development of this project:
+- My mentor Mo for professional guidance, helpful feedback and words of encouragement whilst creating the project
+- My partner for his support and playing/testing the game with me
+- Code Institute community on Slack for resources and support
