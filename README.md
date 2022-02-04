@@ -581,12 +581,25 @@ This application has been deployed from GitHub to Heroku by following the steps:
 6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
 7. Press Enter to create your local clone
 
-
 ## Credits
 
 ### Images
+- [Flaticon](https://www.flaticon.com/free-icon/connect_1707222) was used for the website favicon
 
 ### Code
+- [ASCII Art Generator](http://patorjk.com/software/taag/) was used to create game title
+- Code Institute - for git template IDE and "Love Sandwiches - Essentials Project" which helped me with connecting the Google Spreadsheet to my project.
+- [ColorSpace](https://mycolor.space/gradient) was used to create a gradient button and background effect
+- How to install a Python module, eg. [email validation](https://pypi.org/project/email-validator/Installing)
+- [gspread documentation](https://docs.gspread.org/en/latest/user-guide.html) explained how to obtain a specific value from the google spreadsheet
+- Instructions how to print colored text from [this](https://ozzmaker.com/add-colour-to-text-in-python/) and [this](https://stackabuse.com/how-to-print-colored-text-in-python/) sources
+- [Stack overflow](https://stackoverflow.com/questions/20302331/typing-effect-in-python) helped me create typing effect in games rules
+- [Stack overflow](https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console) code used to clear the terminal console
+- Youtube tutorial [“Python Connect 4 Tutorial”](https://www.youtube.com/watch?v=gvP0gNSO17k&t=429s) made by [Spencer Lepine](https://www.youtube.com/channel/UCBL6vAHJZqUlyJp-rcFU55Q) - I used a part of Spencer's code for display of the game board, moves of alternative players and saving last move's coordinates on the board
+- Youtube tutorial [“Creating a Connect 4 Game in Python”](https://www.youtube.com/watch?v=Bk2ny_aeG-Y) made by [“Painless Programming”](https://www.youtube.com/channel/UC8ck1Yks7yP33XInXw5GZIw) -  inspired me to create a schemat for winning move logic
+<details><summary>See winning move schemat</summary>
+<img src="docs/winning-move- logic-schemat.jpg">
+</details>
 
 ## Future Features
 
