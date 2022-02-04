@@ -152,7 +152,7 @@ With the guit game option, the user exits the program with a goodbye message.
 
 </details>
 
-[Back to Table Of Contents](#table-of-content)
+[Back to Table Of Contents](#table-of-contents)
 
 ## User Stories
 
@@ -176,7 +176,7 @@ With the guit game option, the user exits the program with a goodbye message.
 13. I want data entry to be validated, to guide the user on how to correctly format the input
 
 
-[Back to Table Of Contents](#table-of-content)
+[Back to Table Of Contents](#table-of-contents)
 
 ## Technical Design
 
@@ -218,7 +218,7 @@ VSCode was used to write the project code using Code Institute template
 - sys & sleep - used to create a typing effect within the games rules
 - time - used to displayed delayed messages in the terminal
 
-[Back to Table Of Contents](#table-of-content)
+[Back to Table Of Contents](#table-of-contents)
 
 ## Features
 
@@ -382,7 +382,7 @@ VSCode was used to write the project code using Code Institute template
 ![Moves validation](docs/features/game-screen-move-validation.JPG)
 </details>
 
-[Back to Table Of Contents](#table-of-content)
+[Back to Table Of Contents](#table-of-contents)
 
 ## Validation
 
@@ -561,7 +561,7 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-13-b.jpg">
 </details>
 
-[Back to Table Of Contents](#table-of-content)
+[Back to Table Of Contents](#table-of-contents)
 
 ## Bugs
 
@@ -607,7 +607,7 @@ This application has been deployed from GitHub to Heroku by following the steps:
 6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
 7. Press Enter to create your local clone
 
-[Back to Table Of Contents](#table-of-content)
+[Back to Table Of Contents](#table-of-contents)
 
 ## Credits
 
