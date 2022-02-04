@@ -15,7 +15,31 @@ The classic game is played on a standing board with seven columns of six rows wh
 The objective of the game is to be the first one to achieve a horizontal, vertical or diagonal line of four connected discs.
 
 
-## Table of Content
+## Table of Contents
+  - [Project Goals](#project-goals)
+    - [User Goals](#user-goals)
+    - [Site Owner Goals](#site-owner-goals)
+  - [User Experience](#user-experience)
+    - [Target Audience](#target-audience)
+    - [User Requirements and Expectations](#user-requirements-and-expectations)
+    - [User Manual](#user-manual)
+  - [User Stories](#user-stories)
+    - [Users](#users)
+    - [Site Owner](#site-owner)
+  - [Technical Design](#technical-design)
+    - [Flowchart](#flowchart)
+  - [Technologies Used](#technologies-used)
+    - [Languages](#languages)
+    - [Frameworks & Tools](#frameworks--tools)
+    - [Libraries](#libraries)
+  - [Features](#features)
+  - [Validation](#validation)
+  - [Testing user stories](#testing-user-stories)
+  - [Bugs](#bugs)
+  - [Deployment](#deployment)
+  - [Credits](#credits)
+  - [Acknowledgements](#acknowledgements)
+
 
 ## Project Goals
 
@@ -128,6 +152,7 @@ With the guit game option, the user exits the program with a goodbye message.
 
 </details>
 
+[Back to Table Of Contents](#table-of-content)
 
 ## User Stories
 
@@ -150,8 +175,8 @@ With the guit game option, the user exits the program with a goodbye message.
 12. I want the user to get feedback in case of wrong input
 13. I want data entry to be validated, to guide the user on how to correctly format the input
 
-#### [Back to Table of Content](##Table of Content)
 
+[Back to Table Of Contents](#table-of-content)
 
 ## Technical Design
 
@@ -193,6 +218,7 @@ VSCode was used to write the project code using Code Institute template
 - sys & sleep - used to create a typing effect within the games rules
 - time - used to displayed delayed messages in the terminal
 
+[Back to Table Of Contents](#table-of-content)
 
 ## Features
 
@@ -356,6 +382,7 @@ VSCode was used to write the project code using Code Institute template
 ![Moves validation](docs/features/game-screen-move-validation.JPG)
 </details>
 
+[Back to Table Of Contents](#table-of-content)
 
 ## Validation
 
@@ -534,6 +561,7 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-13-b.jpg">
 </details>
 
+[Back to Table Of Contents](#table-of-content)
 
 ## Bugs
 
@@ -579,6 +607,7 @@ This application has been deployed from GitHub to Heroku by following the steps:
 6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
 7. Press Enter to create your local clone
 
+[Back to Table Of Contents](#table-of-content)
 
 ## Credits
 
