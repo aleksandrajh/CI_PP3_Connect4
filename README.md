@@ -196,35 +196,31 @@ VSCode was used to write the project code using Code Institute template
 
 - Provides user with graphic welcome message
 - Gives user option to view game rules or start game
-  
+- User stories covered: 1, 2
+ 
 <details>
     <summary>Main Menu Screenshot</summary>
 
 ![Main menu](docs/features/main-menu.JPG)
 </details>
 
-This feature covers the following user stories:
-1. I want to have clear options to select in the main menu
-10. I want users to easily select options from the menu
 
 
 ### Game rules
 - Displays clear game rules
 - Allows user to return to the main menu once read
-
+- User stories covered: 2
+  
 <details>
     <summary>Game rules Screenshot</summary>
 
 ![Game rules](docs/features/game-rules.JPG)
 </details>
 
-This feature covers the following user stories:
-
-2. I want to be able to read the rules of the game
-
 
 ### Play options
 - Gives players options to either log in or create a new user
+- User stories covered: 4
 
 <details>
     <summary>Play options Screenshot</summary>
@@ -232,16 +228,13 @@ This feature covers the following user stories:
 ![Play options](docs/features/play-options.JPG)
 </details>
 
-This feature covers the following user stories:
-
-4. I want to be able to log-in if I return to the game
-
 
 ### Log-in
 - Asks users for their email addresses
 - Informs them if the email they input is incorrect or not registered
 - Gives user alternative option to try another email or create a new player
 - If correct, saves their details to Google Spreadsheet
+- User stories covered: 4, 5, 11, 12, 13
 
 <details>
     <summary>Log-in Screenshot</summary>
@@ -255,19 +248,13 @@ This feature covers the following user stories:
 ![Log-in wrong email](docs/features/log-in-wrong-email.JPG)
 </details>
 
-This feature covers the following user stories:
-4. I want to be able to log-in if I return to the game
-5. I want to receive a real time feedback throughout the game
-11. I want user names and emails to be saved to Google Spreadsheet
-12. I want the user to get feedback in case of wrong input
-13. I want data entry to be validated, to guide the user on how to correctly format the input
-
 
 ### Sign-up
 - Asks user for their name and email address
 - Validates user input values
 - Informs user if the name they input is incorrect
 - Informs user if the email is already taken and asks for another one
+- User stories covered: 5, 11, 12, 13
 
 <details>
     <summary>Sign-up Screenshot</summary>
@@ -281,25 +268,16 @@ This feature covers the following user stories:
 ![Sign-up wrong email](docs/features/sign-up-wrong-email.JPG)
 </details>
 
-This feature covers the following user stories:
-5. I want to receive a real time feedback throughout the game
-11. I want user names and emails to be saved to Google Spreadsheet
-12. I want the user to get feedback in case of wrong input
-13. I want data entry to be validated, to guide the user on how to correctly format the input
-
 
 ### Users greeting
 - Displays a greeting message to the user once logged in
+- User stories covered: 3, 9
 
 <details>
     <summary>Greeting Screenshot</summary>
 
 ![User greeting](docs/features/user-greeting.JPG)
 </details>
-
-This feature covers the following user stories:
-3. I want to personalise the game and enter my name
-9. I want users to have a positive experience whilst playing the game
 
 
 ### Game
@@ -308,7 +286,8 @@ This feature covers the following user stories:
 - Display warning message of incorrect column selected
 - Provide feedback on who's won the game
 - Gives options to play again after finished game
-  
+- User stories covered: 3, 5, 6, 12, 13
+
 <details>
     <summary>Game Screenshot</summary>
 
@@ -318,7 +297,7 @@ This feature covers the following user stories:
 <details>
     <summary>Incorrect Move in Game Screenshot</summary>
 
-![Game screen](docs/features/game-screen-wrong-move.JPG)
+![Move validation in Game screen](docs/features/game-screen-move-validation.JPG)
 </details>
 
 <details>
@@ -326,13 +305,6 @@ This feature covers the following user stories:
 
 ![Winner Message](docs/features/game-screen-winner-message.JPG)
 </details>
-
-This feature covers the following user stories:
-3. I want to personalise the game and enter my name
-5. I want to receive a real time feedback throughout the game
-6. I want to get a feedback when I win the game
-12. I want the user to get feedback in case of wrong input
-13. I want data entry to be validated, to guide the user on how to correctly format the input
 
 
 ### Finished Game options
@@ -345,15 +317,13 @@ This feature covers the following user stories:
 
 #### Play 
 - Restarts the game for the same players
+- User stories covered: 7
 
 <details>
     <summary>Restart game Screenshot</summary>
 
 ![Restart Game](docs/features/restart-game.JPG)
 </details>
-
-This feature covers the following user stories:
-7. I want to be able to play multiple games when I'm logged in
 
 #### Go to main menu
 - Brings players to the main menu of the program
@@ -367,10 +337,10 @@ This feature covers the following user stories:
 ![Quit Game](docs/features/quit-game.JPG)
 </details>
 
-
 ### User Input Validation
 - Displays an error message if user input is not in a form that was expected
 - Asks for a new input and provides guidance to user on how to correctly format the input
+- User stories covered: 5, 12, 13
 
 <details>
     <summary>Username validation Screenshot</summary>
