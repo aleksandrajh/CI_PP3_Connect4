@@ -188,7 +188,7 @@ class Board():
 
         # If there is no available space in the column
         print(Col.RED + "You cannot put a piece in the full column.")
-        print("Please choose another column.\n")
+        print(Col.RED + "Please choose another column.\n")
         return False
 
     def winning_move(self) -> bool:
