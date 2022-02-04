@@ -386,7 +386,7 @@ VSCode was used to write the project code using Code Institute template
 | Main menu | Select option 2 | Users are asked if they played the game before | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-1.png">
+<img src="docs/testing/user-story-1.JPG">
 </details>
 
 
@@ -397,7 +397,7 @@ VSCode was used to write the project code using Code Institute template
 | Main menu | Select option 1 | Users are presented with game rules | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-2.png">
+<img src="docs/testing/user-story-2.JPG">
 </details>
 
 
@@ -409,10 +409,10 @@ VSCode was used to write the project code using Code Institute template
 | Play game options | Select option 2 (sign-up) | Users are asked to input their names, once validated the names are saved and greeting message displayed. Names are displayed during the game | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-3-a.png">
+<img src="docs/testing/user-story-3-a.JPG">
 </details>
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-3-b.png">
+<img src="docs/testing/user-story-3-b.JPG">
 </details>
 
 
@@ -423,7 +423,7 @@ VSCode was used to write the project code using Code Institute template
 | Play game options | Select option 1 (log-in) | Returning users are asked to input the email address they registered before and once validated, a greeting message with their name is displayed | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-4.png">
+<img src="docs/testing/user-story-4.JPG">
 </details>
 
 
@@ -450,6 +450,90 @@ VSCode was used to write the project code using Code Institute template
 <details><summary>Screenshots</summary>
 <img src="docs/testing/user-story-6-a.JPG">
 <img src="docs/testing/user-story-6-b.JPG">
+</details>
+
+
+7. I want to be able to play multiple games when I'm logged in
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Finished Game options | User selects play again option  | The game restarts for the same players | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-7.JPG">
+</details>
+
+
+8. I want a random selection of the player to start a new game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Game screen | Once players have logged-in or signed-up the game is loaded  | Different user names display | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-8-a.JPG">
+<img src="docs/testing/user-story-8-b.JPG">
+</details>
+
+
+9. I want users to have a positive experience whilst playing the game
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Across all screen | Simple navigation and game play  | Colored messages and straightforward instructions | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-9-a.JPG">
+<img src="docs/testing/user-story-9-b.JPG">
+<img src="docs/testing/user-story-9-c.JPG">
+</details>
+
+
+10.  I want users to easily select options from the menu
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Across all screen | User inputs invalid numeric value | Users are asked to try again between available options from the menu | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-10-a.JPG">
+<img src="docs/testing/user-story-10-b.JPG">
+<img src="docs/testing/user-story-10-c.JPG">
+</details>
+
+
+11.  I want user names and emails to be saved to Google Spreadsheet
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Log-in | Both users input their names and email address which has not been previously registered  | Username and email addresses are saved to Google Spreadsheet to the next available rows in columns 1 & 2 respectively | Works as expected |
+
+<details><summary>Screenshot</summary>
+<img src="docs/testing/user-story-11.JPG">
+</details>
+
+
+12.  I want the user to get feedback in case of wrong input
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Across all screen | User inputs invalid numeric value in the menu or game. User inputs invalid value during log-in or sign-up | Feedback message displayed to the user | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-12-a.JPG">
+<img src="docs/testing/user-story-12-b.JPG">
+</details>
+
+
+13.  I want data entry to be validated, to guide the user on how to correctly format the input
+
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Across all screen | User inputs invalid data | Feedback message with instructions diplayed to the user | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-13-a.JPG">
+<img src="docs/testing/user-story-13-b.JPG">
 </details>
 
 
