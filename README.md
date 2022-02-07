@@ -520,9 +520,9 @@ VSCode was used to write the project code using Code Institute template
 | Across all screen | Simple navigation and game play  | Colored messages and straightforward instructions | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-10-a.JPG">
-<img src="docs/testing/user-story-10-b.JPG">
-<img src="docs/testing/user-story-10-c.JPG">
+<img src="docs/testing/user-story-10-a.jpg">
+<img src="docs/testing/user-story-10-b.jpg">
+<img src="docs/testing/user-story-10-c.jpg">
 </details>
 
 11.  I want users to easily select options from the menu
