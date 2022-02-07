@@ -255,14 +255,17 @@ class Board():
                 print(Col.GREEN + "\n----> " +
                       f"{val.player1name.upper()}" + " is the winner <----\n")
                 val.player1score += 1
-                # Update number of games won by Player2 saved in Google Spreadsheet
-                val.PLAYERS_WORKSHEET.update_cell(val.player1email_row, 3, val.player1score)
+                # Update number of games won by Player2 on Google Spreadsheet
+                val.PLAYERS_WORKSHEET.update_cell(val.player1email_row, 3, +
+                                                  val.player1score)
+
             else:
                 print(Col.GREEN + "\n----> " +
                       f"{val.player2name.upper()}" + " is the winner <----\n")
                 val.player2score += 1
-                # Update number of games won by Player2 saved in Google Spreadsheet
-                val.PLAYERS_WORKSHEET.update_cell(val.player2email_row, 3, val.player2score)
+                # Update number of games won by Player2 on Google Spreadsheet
+                val.PLAYERS_WORKSHEET.update_cell(val.player2email_row, 3, +
+                                                  val.player2score)
             time.sleep(2)
             separate_line()
             play_again()
