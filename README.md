@@ -71,7 +71,7 @@ There is no specific audience of this game. However, I would recommend that play
 
 ### User Manual
 
-<details><summary>Click here to view instructions to use</summary>
+<details><summary>Click here to view instructions</summary>
 
 #### Main Menu
 On the main menu, users are presented with an ASCII art rendering of the name 'Connect 4'. Below the welcome graphic there are a couple of options for user to select from.
@@ -135,10 +135,12 @@ The game continues until one of the players connect their four pieces.
 
 When a player wins, a message with their name is shown on the screen.
 
-Players have 3 different options to choose from:
+Players have 4 different options to choose from:
 1. Play again
 2. Go to main menu
-3. Quit game
+3. See your statistics
+4. Quit game
+
 Operation: Input a numeric value and press enter key.
 
 #### Play again
@@ -146,6 +148,9 @@ By selecting this option a new game starts for the same players
 
 #### Go to main menu
 Brings players to the main menu of the program
+
+#### See your statistics
+Display number of games won so far by each logged player.
 
 #### Quit game
 With the guit game option, the user exits the program with a goodbye message.
@@ -166,14 +171,15 @@ With the guit game option, the user exits the program with a goodbye message.
 6. I want to get a feedback when I win the game
 7. I want to be able to play multiple games when I'm logged in
 8. I want a random selection of the player to start a new game
+9. I want to see how many games I've won so far
 
 ### Site Owner
 
-9. I want users to have a positive experience whilst playing the game
-10. I want users to easily select options from the menu
-11. I want user names and emails to be saved to Google Spreadsheet
-12. I want the user to get feedback in case of wrong input
-13. I want data entry to be validated, to guide the user on how to correctly format the input
+10. I want users to have a positive experience whilst playing the game
+11. I want users to easily select options from the menu
+12. I want user names and emails to be saved to Google Spreadsheet
+13. I want the user to get feedback in case of wrong input
+14. I want data entry to be validated, to guide the user on how to correctly format the input
 
 
 [Back to Table Of Contents](#table-of-contents)
@@ -260,7 +266,7 @@ VSCode was used to write the project code using Code Institute template
 - Informs them if the email they input is incorrect or not registered
 - Gives user alternative option to try another email or create a new player
 - If correct, saves their details to Google Spreadsheet
-- User stories covered: 4, 5, 11, 12, 13
+- User stories covered: 4, 5, 12, 13, 14
 
 <details>
     <summary>Log-in Screenshot</summary>
@@ -279,7 +285,7 @@ VSCode was used to write the project code using Code Institute template
 - Validates user input values
 - Informs user if the name they input is incorrect
 - Informs user if the email is already taken and asks for another one
-- User stories covered: 5, 11, 12, 13
+- User stories covered: 5, 12, 13, 14
 
 <details>
     <summary>Sign-up Screenshot</summary>
@@ -295,7 +301,7 @@ VSCode was used to write the project code using Code Institute template
 
 ### Users greeting
 - Displays a greeting message to the user once logged in
-- User stories covered: 3, 9
+- User stories covered: 3, 10
 
 <details>
     <summary>Greeting Screenshot</summary>
@@ -309,7 +315,7 @@ VSCode was used to write the project code using Code Institute template
 - Display warning message of incorrect column selected
 - Provide feedback on who's won the game
 - Gives options to play again after finished game
-- User stories covered: 3, 5, 6, 12, 13
+- User stories covered: 3, 5, 6, 13, 14
 
 <details>
     <summary>Game Screenshot</summary>
@@ -350,6 +356,15 @@ VSCode was used to write the project code using Code Institute template
 #### Go to main menu
 - Brings players to the main menu of the program
 
+#### See your statistics
+- Display number of games won so far by each logged player
+
+<details>
+    <summary>See your statistics Screenshot</summary>
+
+![Statistics](docs/features/statistics.jpg)
+</details>
+
 #### Quit game
 - Exits the program with a goodbye message
 
@@ -362,7 +377,7 @@ VSCode was used to write the project code using Code Institute template
 ### User Input Validation
 - Displays an error message if user input is not in a form that was expected
 - Asks for a new input and provides guidance to user on how to correctly format the input
-- User stories covered: 5, 12, 13
+- User stories covered: 5, 13, 14
 
 <details>
     <summary>Username validation Screenshot</summary>
