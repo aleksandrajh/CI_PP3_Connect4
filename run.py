@@ -195,6 +195,7 @@ class Board():
         """
         Check for 4 pieces in a row
         either horizontally, vertically or diagonally
+        updates the number of won games for winning player
         """
         last_row = self.last_move[0]
         last_col = self.last_move[1]
@@ -253,10 +254,15 @@ class Board():
             if last_move == Col.RED + 'X':
                 print(Col.GREEN + "\n----> " +
                       f"{val.player1name.upper()}" + " is the winner <----\n")
+                val.player1score += 1
+                # Update number of games won by Player2 saved in Google Spreadsheet
+                val.PLAYERS_WORKSHEET.update_cell(val.player1email_row, 3, val.player1score)
             else:
                 print(Col.GREEN + "\n----> " +
                       f"{val.player2name.upper()}" + " is the winner <----\n")
-
+                val.player2score += 1
+                # Update number of games won by Player2 saved in Google Spreadsheet
+                val.PLAYERS_WORKSHEET.update_cell(val.player2email_row, 3, val.player2score)
             time.sleep(2)
             separate_line()
             play_again()
@@ -315,12 +321,13 @@ def play_again():
     go back to the main menu or exit the game
     """
     print(Col.GREEN + "What would you like to do:")
-    options = "1) Play again\n2) Go to main menu\n3) Quit game\n"
+    options = "1) Play again\n2) Go to main menu\n\
+3) See your statistics\n4) Quit game\n"
     selected = input(options)
     separate_line()
 
     # Validate if answer is either 1 or 2 or 3
-    while selected not in ("1", "2", "3"):
+    while selected not in ("1", "2", "3", "4"):
         print(Col.GREEN + "Please choose between one of below options:")
         selected = input(options)
 
@@ -338,8 +345,25 @@ def play_again():
         main()
 
     elif selected == "3":
+        show_stats()
+        time.sleep(1)
+        play_again()
+
+    elif selected == "4":
         print(Col.BLUE + "Thanks for playing! See you soon!\n")
         sys.exit()
+
+
+def show_stats():
+    """
+    Display number of games won so far by each player
+    who played in the last game
+    """
+    print(Col.BLUE + "Total number of games won by " +
+          f"{val.player1name}: {val.player1score}")
+    print(Col.BLUE + "Total number of games won by " +
+          f"{val.player2name}: {val.player2score}")
+    separate_line()
 
 
 def main():

@@ -29,14 +29,20 @@ players = ["Player1", "Player2"]
 def log_in_players(players):
     """
     User can log in to existing account
-    By input their email address which is saved in the 2 row of the spreadsheet
+    with their email address which is saved in the 2 row of the spreadsheet
     Their names are retrieved from the first row
+    Number of games won so far are saved in the 3rd column
     """
     print(Col.GREEN + "Welcome back! " +
           "Please help me verify your login details.")
 
     global player1name
     global player2name
+    global player1score
+    global player2score
+    # Rows corresponding to input email addresses
+    global player1email_row
+    global player2email_row
 
     for i, player in enumerate(players):
         while True:
@@ -44,15 +50,18 @@ def log_in_players(players):
             existing_player = is_player_registered(email)
 
             if existing_player:
-                email_row = PLAYERS_WORKSHEET.find(email).row
                 if i == 0:
-                    player1name = PLAYERS_WORKSHEET.row_values(email_row)[0]
+                    player1email_row = PLAYERS_WORKSHEET.find(email).row
+                    player1name = PLAYERS_WORKSHEET.row_values(player1email_row)[0]
+                    player1score = int(PLAYERS_WORKSHEET.row_values(player1email_row)[2])
+
                     print(Col.BLUE + f"\nHello {player1name}!\n")
                 elif i == 1:
-                    player2name = PLAYERS_WORKSHEET.row_values(email_row)[0]
+                    player2email_row = PLAYERS_WORKSHEET.find(email).row
+                    player2name = PLAYERS_WORKSHEET.row_values(player2email_row)[0]
+                    player2score = int(PLAYERS_WORKSHEET.row_values(player2email_row)[2])
                     print(Col.BLUE + f"\nHello {player2name}!\n")
                 break
-
             else:
                 input_correct_email(player)
 
@@ -162,6 +171,10 @@ def register_new_players(players):
     """
     global player1name
     global player2name
+    global player1score
+    global player2score
+    global player1email_row
+    global player2email_row
 
     time.sleep(1)
     print(Col.BLUE + "Starting the registration...")
@@ -173,10 +186,15 @@ def register_new_players(players):
                 player_1_info = create_new_players(player)
                 update_players_worksheet(player_1_info)
                 player1name = player_1_info[0]
+                player1score = player_1_info[2]
+                player1email_row = PLAYERS_WORKSHEET.find(player_1_info[1]).row
+
             elif i == 1:
                 player_2_info = create_new_players(player)
                 update_players_worksheet(player_2_info)
                 player2name = player_2_info[0]
+                player2score = player_2_info[2]
+                player2email_row = PLAYERS_WORKSHEET.find(player_2_info[1]).row
         break
 
     separate_line()
@@ -216,7 +234,7 @@ def create_new_players(player_number: str) -> list:
             print(Col.RED + f"\nSorry {player}, this email is already used.")
             print(Col.RED + "Please try another email.\n")
 
-    return [player, player_email]
+    return [player, player_email, 0]
 
 
 def validate_username(player_name: str) -> bool:
