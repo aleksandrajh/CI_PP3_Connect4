@@ -141,10 +141,10 @@ Players have 4 different options to choose from:
 Operation: Input a numeric value and press enter key.
 
 #### Play again
-By selecting this option a new game starts for the same players
+By selecting this option a new game starts for the same players.
 
 #### Go to main menu
-Brings players to the main menu of the program
+Brings players to the main menu of the program.
 
 #### See your statistics
 Display number of games won so far by each logged player.
