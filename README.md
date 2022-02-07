@@ -14,7 +14,6 @@ The classic game is played on a standing board with seven columns of six rows wh
 
 The objective of the game is to be the first one to achieve a horizontal, vertical or diagonal line of four connected discs.
 
-
 ## Table of Contents
   - [Project Goals](#project-goals)
     - [User Goals](#user-goals)
@@ -40,7 +39,6 @@ The objective of the game is to be the first one to achieve a horizontal, vertic
   - [Credits](#credits)
   - [Acknowledgements](#acknowledgements)
 
-
 ## Project Goals
 
 ### User Goals
@@ -54,7 +52,6 @@ The objective of the game is to be the first one to achieve a horizontal, vertic
 - Create a game that is easy and clear to user
 - Ensure that users understand the purpose of the game
 - Create a game that gives feedback to the user whilst playing
-
 
 ## User Experience
 
@@ -181,7 +178,6 @@ With the guit game option, the user exits the program with a goodbye message.
 13. I want the user to get feedback in case of wrong input
 14. I want data entry to be validated, to guide the user on how to correctly format the input
 
-
 [Back to Table Of Contents](#table-of-contents)
 
 ## Technical Design
@@ -193,7 +189,6 @@ The following flowchart summarises the structure and logic of the application.
 <details><summary>Flowchart</summary>
 <img src="docs/Connect4-flowchart.jpg">
 </details>
-
 
 ## Technologies Used
 
@@ -358,6 +353,7 @@ VSCode was used to write the project code using Code Institute template
 
 #### See your statistics
 - Display number of games won so far by each logged player
+- User stories covered: 9
 
 <details>
     <summary>See your statistics Screenshot</summary>
@@ -415,7 +411,6 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/validation/pep8-validation-colors.JPG">
 </details>
 
-
 ## Testing user stories
 
 1. I want to have clear options to select in the main menu
@@ -429,7 +424,6 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-1.jpg">
 </details>
 
-
 2. I want to be able to read the rules of the game
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
@@ -439,7 +433,6 @@ VSCode was used to write the project code using Code Institute template
 <details><summary>Screenshot</summary>
 <img src="docs/testing/user-story-2.jpg">
 </details>
-
 
 3. I want to personalise the game and enter my name
 
@@ -455,7 +448,6 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-3-b.jpg">
 </details>
 
-
 4. I want to be able to log-in if I return to the game
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
@@ -465,7 +457,6 @@ VSCode was used to write the project code using Code Institute template
 <details><summary>Screenshot</summary>
 <img src="docs/testing/user-story-4.jpg">
 </details>
-
 
 5. I want to receive a real time feedback throughout the game
 
@@ -480,7 +471,6 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-5-d.JPG">
 </details>
 
-
 6. I want to get a feedback when I win the game
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
@@ -492,7 +482,6 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-6-b.JPG">
 </details>
 
-
 7. I want to be able to play multiple games when I'm logged in
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
@@ -502,7 +491,6 @@ VSCode was used to write the project code using Code Institute template
 <details><summary>Screenshot</summary>
 <img src="docs/testing/user-story-7.jpg">
 </details>
-
 
 8. I want a random selection of the player to start a new game
 
@@ -515,65 +503,70 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-8-b.JPG">
 </details>
 
+9. I want to see how many games I've won so far
 
-9. I want users to have a positive experience whilst playing the game
+| **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
+| ------------- | ----------------------------- | ---------------------------- | ----------------- |
+| Finished Game options | Select option 3  | Display number of games won for Player1 & Player2 | Works as expected |
+
+<details><summary>Screenshots</summary>
+<img src="docs/testing/user-story-9.jpg">
+</details>
+
+10. I want users to have a positive experience whilst playing the game
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
 | Across all screen | Simple navigation and game play  | Colored messages and straightforward instructions | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-9-a.JPG">
-<img src="docs/testing/user-story-9-b.JPG">
-<img src="docs/testing/user-story-9-c.JPG">
+<img src="docs/testing/user-story-10-a.JPG">
+<img src="docs/testing/user-story-10-b.JPG">
+<img src="docs/testing/user-story-10-c.JPG">
 </details>
 
-
-10.  I want users to easily select options from the menu
+11.  I want users to easily select options from the menu
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
 | Across all screen | User inputs invalid numeric value | Users are asked to try again between available options from the menu | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-10-a.jpg">
-<img src="docs/testing/user-story-10-b.jpg">
-<img src="docs/testing/user-story-10-c.jpg">
+<img src="docs/testing/user-story-11-a.jpg">
+<img src="docs/testing/user-story-11-b.jpg">
+<img src="docs/testing/user-story-11-c.jpg">
 </details>
 
-
-11.  I want user names and emails to be saved to Google Spreadsheet
+12.  I want user names and emails to be saved to Google Spreadsheet
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
 | Log-in | Both users input their names and email address which has not been previously registered  | Username and email addresses are saved to Google Spreadsheet to the next available rows in columns 1 & 2 respectively | Works as expected |
 
 <details><summary>Screenshot</summary>
-<img src="docs/testing/user-story-11.jpg">
+<img src="docs/testing/user-story-12.jpg">
 </details>
 
-
-12.  I want the user to get feedback in case of wrong input
+13.  I want the user to get feedback in case of wrong input
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
 | Across all screen | User inputs invalid numeric value in the menu or game. User inputs invalid value during log-in or sign-up | Feedback message displayed to the user | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-12-a.jpg">
-<img src="docs/testing/user-story-12-b.jpg">
+<img src="docs/testing/user-story-13-a.jpg">
+<img src="docs/testing/user-story-13-b.jpg">
 </details>
 
-
-13.  I want data entry to be validated, to guide the user on how to correctly format the input
+14.  I want data entry to be validated, to guide the user on how to correctly format the input
 
 | **Feature**   | **Action**                    | **Expected Result**          | **Actual Result** |
 | ------------- | ----------------------------- | ---------------------------- | ----------------- |
 | Across all screen | User inputs invalid data | Feedback message with instructions diplayed to the user | Works as expected |
 
 <details><summary>Screenshots</summary>
-<img src="docs/testing/user-story-13-a.jpg">
-<img src="docs/testing/user-story-13-b.jpg">
+<img src="docs/testing/user-story-14-a.jpg">
+<img src="docs/testing/user-story-14-b.jpg">
 </details>
 
 [Back to Table Of Contents](#table-of-contents)
@@ -589,7 +582,6 @@ VSCode was used to write the project code using Code Institute template
 | Players names input values are not displayed in the game – instead of name a “‘Player1’’s / ‘Player2’’s move.” is shown | Reassign a value of player1name & player2name to the indexed-0 value (name) input by the user in ‘create_new_players’ function |
 | Users input data was recorded in the same row in four columns instead of 2 separate rows | Created a list of players and while loop inside the 'register_new_players' function for Google Spreadsheet update separately for two players |
 | There were quite a few errors and warnings related to exceeded number of characters in line, whitespace within a blank line, trailing white spaces or missing white spaces around operators | Split the comments or print functions into two separate rows maintaining correct indentation. Followed a guidance within pep8 online tool and corrected all warnings and errors |
-
 
 ## Deployment
 
@@ -643,7 +635,6 @@ This application has been deployed from GitHub to Heroku by following the steps:
 <details><summary>See winning move schemat</summary>
 <img src="docs/winning-move- logic-schemat.jpg">
 </details>
-
 
 ## Acknowledgements
 I would like to thank everyone who supported me in the development of this project:
