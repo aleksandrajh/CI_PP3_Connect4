@@ -52,16 +52,21 @@ def log_in_players(players):
             if existing_player:
                 if i == 0:
                     player1email_row = PLAYERS_WORKSHEET.find(email).row
-                    player1name = PLAYERS_WORKSHEET.row_values(player1email_row)[0]
-                    player1score = int(PLAYERS_WORKSHEET.row_values(player1email_row)[2])
+                    player1name = \
+                        PLAYERS_WORKSHEET.row_values(player1email_row)[0]
+                    player1score = \
+                        int(PLAYERS_WORKSHEET.row_values(player1email_row)[2])
 
                     print(Col.BLUE + f"\nHello {player1name}!\n")
                 elif i == 1:
                     player2email_row = PLAYERS_WORKSHEET.find(email).row
-                    player2name = PLAYERS_WORKSHEET.row_values(player2email_row)[0]
-                    player2score = int(PLAYERS_WORKSHEET.row_values(player2email_row)[2])
+                    player2name = \
+                        PLAYERS_WORKSHEET.row_values(player2email_row)[0]
+                    player2score = \
+                        int(PLAYERS_WORKSHEET.row_values(player2email_row)[2])
                     print(Col.BLUE + f"\nHello {player2name}!\n")
                 break
+
             else:
                 input_correct_email(player)
 
