@@ -293,14 +293,18 @@ def run_game():
                 print(f"{val.player1name}'s move. " +
                        "You play with " + Col.RED + "X")
                 player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
+
             else:
                 print(f"{val.player2name}'s move. " +
                       "You play with " + Col.YELLOW + "O")
                 player_move = input(f"Choose a column 1 - {BOARD_WIDTH}:\n")
 
-            # if player types invalid input
             try:
-                is_move_valid = game.move(int(player_move)-1)
+                if (int(player_move) > 0):
+                    is_move_valid = game.move(int(player_move)-1)
+                # if player types invalid input
+                else:
+                    print(Col.RED + 'Incorrect input. Please try again\n')
             except:
                 print(Col.RED + f"Please choose a column 1 - {BOARD_WIDTH}.\n")
 
