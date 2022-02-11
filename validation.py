@@ -248,16 +248,21 @@ def validate_username(player_name: str) -> bool:
     It should be between 2 - 12 long using only A-Z
     @param player_name(string): Player name as entered by user input
     """
-    if len(player_name) < 2 or len(player_name) > 12:
-        print(Col.RED + "Player name must be between 2 - 12 characters long.")
-        print(Col.RED + "Please try again.\n")
+    try:
+        if len(player_name) < 2 or len(player_name) > 12:
+            print(Col.RED + "Player name must be between" +
+                  "2 - 12 characters long.")
+            print(Col.RED + "Please try again.\n")
 
-    elif not player_name.isalpha():
-        print(Col.RED + "Player name must only contain A-Z. " +
-              "Please try again.\n")
+        elif not player_name.isalpha():
+            print(Col.RED + "Player name must only contain A-Z. " +
+                  "Please try again.\n")
 
-    else:
-        return True
+        else:
+            return True
+
+    except TypeError:
+        return False
 
 
 def update_players_worksheet(data: list):
