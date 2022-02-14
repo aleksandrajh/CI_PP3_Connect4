@@ -218,6 +218,7 @@ VSCode was used to write the project code using Code Institute template
 - random - used to alternate first player to start the game
 - sys & sleep - used to create a typing effect within the games rules
 - time - used to displayed delayed messages in the terminal
+- [unittest](https://docs.python.org/3/library/unittest.html) - used to carry out testing on single units in validation.py file
 
 [Back to Table Of Contents](#table-of-contents)
 
@@ -409,6 +410,10 @@ VSCode was used to write the project code using Code Institute template
 
 <details><summary>PEP3 check for colors.py</summary>
 <img src="docs/validation/pep8-validation-colors.JPG">
+</details>
+
+<details><summary>PEP3 check for test_validation.py</summary>
+<img src="docs/validation/pep8-validation-test-validation.JPG">
 </details>
 
 ## Testing user stories
@@ -630,6 +635,7 @@ This application has been deployed from GitHub to Heroku by following the steps:
 - Instructions how to print colored text from [this](https://ozzmaker.com/add-colour-to-text-in-python/) and [this](https://stackabuse.com/how-to-print-colored-text-in-python/) sources
 - [Stack overflow](https://stackoverflow.com/questions/20302331/typing-effect-in-python) helped me create typing effect in games rules
 - [Stack overflow](https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console) code used to clear the terminal console
+- Youtube video on [Unit Test in Python](https://www.youtube.com/watch?v=1Lfv5tUGsn8) made by Socratica was very helpful to understand the concept of unit tesing
 - Youtube tutorial [“Python Connect 4 Tutorial”](https://www.youtube.com/watch?v=gvP0gNSO17k&t=429s) made by [Spencer Lepine](https://www.youtube.com/channel/UCBL6vAHJZqUlyJp-rcFU55Q) - I used a part of Spencer's code for display of the game board, moves of alternative players and saving last move's coordinates on the board
 - Youtube tutorial [“Creating a Connect 4 Game in Python”](https://www.youtube.com/watch?v=Bk2ny_aeG-Y) made by [“Painless Programming”](https://www.youtube.com/channel/UC8ck1Yks7yP33XInXw5GZIw) -  inspired me to create a schemat for winning move logic
 <details><summary>See winning move schemat</summary>
