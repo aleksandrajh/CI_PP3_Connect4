@@ -594,15 +594,15 @@ The testing approach is as follows:
 
 I needed to amend the function and add 'Try Except' blocks to handle TypeError.
 Initial error called - 'TypeError: object of type 'int' has no len()'
-![User email unit test](docs/testing/unit-tests/email-validation-test.JPG)
-![User name unit test](docs/testing/unit-tests/username-validation-test.JPG)
+![User email unit test](docs/testing/unit-tests/email-validation-test.jpg)
+![User name unit test](docs/testing/unit-tests/username-validation-test.jpg)
 
   - validation of data in log_in_players and register_new_players
 
 When running the test initially, there was a TypeError called - 'TypeError: 'int' object is not iterable'. I handled this error by adding 'Try Except' blocks to both functions. This resulted with passed test.
 
-![Log-in unit test](docs/testing/unit-tests/log-in-validation-test.JPG)
-![Registration unit test](docs/testing/unit-tests/registeration-test.JPG)
+![Log-in unit test](docs/testing/unit-tests/log-in-validation-test.jpg)
+![Registration unit test](docs/testing/unit-tests/registeration-test.jpg)
 
 </details>
 
