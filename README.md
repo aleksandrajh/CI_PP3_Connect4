@@ -33,7 +33,9 @@ The objective of the game is to be the first one to achieve a horizontal, vertic
     - [Libraries](#libraries)
   - [Features](#features)
   - [Validation](#validation)
-  - [Testing user stories](#testing-user-stories)
+  - [Testing](#testing)
+    - [Manual Testing](#manual-testing)
+    - [Automated Testing](#automated-testing)
   - [Bugs](#bugs)
   - [Deployment](#deployment)
   - [Credits](#credits)
@@ -416,7 +418,14 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/validation/pep8-validation-test-validation.JPG">
 </details>
 
-## Testing user stories
+## Testing
+
+The testing approach is as follows:
+1. Manual testing of user stories
+2. Automated unit testing using the Python unittest library
+
+### Manual Testing
+<details><summary>See user stories testing</summary>
 
 1. I want to have clear options to select in the main menu
 
@@ -574,8 +583,30 @@ VSCode was used to write the project code using Code Institute template
 <img src="docs/testing/user-story-14-b.jpg">
 </details>
 
-[Back to Table Of Contents](#table-of-contents)
+</details>
 
+### Automated Testing
+<details><summary>See unit testing</summary>
+
+- I wrote unit tests using Python unittest library
+- I tested separate functions to verify correct user input:
+  - validation of user email and user name input
+
+I needed to amend the function and add 'Try Except' blocks to handle TypeError.
+Initial error called - 'TypeError: object of type 'int' has no len()'
+![User email unit test](docs/testing/unit-tests/email-validation-test.JPG)
+![User name unit test](docs/testing/unit-tests/username-validation-test.JPG)
+
+  - validation of data in log_in_players and register_new_players
+
+When running the test initially, there was a TypeError called - 'TypeError: 'int' object is not iterable'. I handled this error by adding 'Try Except' blocks to both functions. This resulted with passed test.
+
+![Log-in unit test](docs/testing/unit-tests/log-in-validation-test.JPG)
+![Registration unit test](docs/testing/unit-tests/registeration-test.JPG)
+
+</details>
+
+[Back to Table Of Contents](#table-of-contents)
 ## Bugs
 
 | **Bug** | **Fix** |
@@ -644,6 +675,6 @@ This application has been deployed from GitHub to Heroku by following the steps:
 
 ## Acknowledgements
 I would like to thank everyone who supported me in the development of this project:
-- My mentor Mo for professional guidance, helpful feedback and words of encouragement whilst creating the project
+- My mentor Mo for professional guidance, helpful feedback and words of encouragement whilst creating the project. Also, for pushing me to learn about the unit test and include it within this project.
 - My partner for his support and playing/testing the game with me
 - Code Institute community on Slack for resources and support
