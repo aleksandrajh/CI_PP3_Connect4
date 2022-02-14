@@ -71,9 +71,9 @@ def log_in_players(players):
                 else:
                     input_correct_email(player)
 
-            time.sleep(2)
-            start_game_message(player1name, player2name)
-    
+        time.sleep(2)
+        start_game_message(player1name, player2name)
+
     except TypeError:
         return None
 
@@ -189,30 +189,34 @@ def register_new_players(players):
     print(Col.BLUE + "Starting the registration...")
     print(" ")
 
-    while True:
-        for i, player in enumerate(players):
-            if i == 0:
-                player_1_info = create_new_players(player)
-                update_players_worksheet(player_1_info)
-                player1name = player_1_info[0]
-                player1score = player_1_info[2]
-                player1email_row = PLAYERS_WORKSHEET.find(player_1_info[1]).row
+    try:
+        while True:
+            for i, player in enumerate(players):
+                if i == 0:
+                    player_1_info = create_new_players(player)
+                    update_players_worksheet(player_1_info)
+                    player1name = player_1_info[0]
+                    player1score = player_1_info[2]
+                    player1email_row = PLAYERS_WORKSHEET.find(player_1_info[1]).row
 
-            elif i == 1:
-                player_2_info = create_new_players(player)
-                update_players_worksheet(player_2_info)
-                player2name = player_2_info[0]
-                player2score = player_2_info[2]
-                player2email_row = PLAYERS_WORKSHEET.find(player_2_info[1]).row
-        break
+                elif i == 1:
+                    player_2_info = create_new_players(player)
+                    update_players_worksheet(player_2_info)
+                    player2name = player_2_info[0]
+                    player2score = player_2_info[2]
+                    player2email_row = PLAYERS_WORKSHEET.find(player_2_info[1]).row
+            break
 
-    separate_line()
-    print(f"Thanks {player1name} & {player2name}, " +
-           "your details have been registered!\n")
+        separate_line()
+        print(f"Thanks {player1name} & {player2name}, " +
+               "your details have been registered!\n")
 
-    time.sleep(2)
-    start_game_message(player1name, player2name)
-    separate_line()
+        time.sleep(2)
+        start_game_message(player1name, player2name)
+        separate_line()
+
+    except TypeError:
+        return None
 
 
 def create_new_players(player_number: str) -> list:

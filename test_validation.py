@@ -17,10 +17,15 @@ class TestValidate(unittest.TestCase):
         self.assertEqual(val.validate_username('AveryLongPlayername'), None)
         self.assertEqual(val.validate_username(123), False)
 
-class TestLogIn(unittest.TestCase):
-    def test_log_in_int(self):
-        self.assertEqual(val.log_in_players(123), None)
+
+class TestUsersLogInOrRegistration(unittest.TestCase):
+    def test_log_in(self):
         self.assertTrue(val.log_in_players(['User1', 'User2']), True)
+        self.assertEqual(val.log_in_players(123), None)
+
+    def test_register_players(self):
+        self.assertTrue(val.register_new_players(['User1', 'User2']), True)
+        self.assertEqual(val.register_new_players(123), None)
 
 
 if __name__ == '__main__':
