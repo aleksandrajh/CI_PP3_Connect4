@@ -20,7 +20,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 # My updated values
 SHEET = GSPREAD_CLIENT.open('connect4_database')
-PLAYERS_WORKSHEET = SHEET.worksheet("Players")
+WORKSHEET = SHEET.worksheet("Players")
 
 
 players = ["Player1", "Player2"]
@@ -52,19 +52,19 @@ def log_in_players(players):
 
                 if existing_player:
                     if i == 0:
-                        player1email_row = PLAYERS_WORKSHEET.find(email).row
+                        player1email_row = WORKSHEET.find(email).row
                         player1name = \
-                            PLAYERS_WORKSHEET.row_values(player1email_row)[0]
+                            WORKSHEET.row_values(player1email_row)[0]
                         player1score = \
-                            int(PLAYERS_WORKSHEET.row_values(player1email_row)[2])
+                            int(WORKSHEET.row_values(player1email_row)[2])
 
                         print(Col.BLUE + f"\nHello {player1name}!\n")
                     elif i == 1:
-                        player2email_row = PLAYERS_WORKSHEET.find(email).row
+                        player2email_row = WORKSHEET.find(email).row
                         player2name = \
-                            PLAYERS_WORKSHEET.row_values(player2email_row)[0]
+                            WORKSHEET.row_values(player2email_row)[0]
                         player2score = \
-                            int(PLAYERS_WORKSHEET.row_values(player2email_row)[2])
+                            int(WORKSHEET.row_values(player2email_row)[2])
                         print(Col.BLUE + f"\nHello {player2name}!\n")
                     break
 
@@ -113,7 +113,7 @@ def is_player_registered(email: str) -> bool:
     by checking if email exists in the database
     @param email(string): Player's email address
     """
-    email_column = PLAYERS_WORKSHEET.col_values(2)
+    email_column = WORKSHEET.col_values(2)
 
     if email in email_column:
         return True
@@ -197,14 +197,14 @@ def register_new_players(players):
                     update_players_worksheet(player_1_info)
                     player1name = player_1_info[0]
                     player1score = player_1_info[2]
-                    player1email_row = PLAYERS_WORKSHEET.find(player_1_info[1]).row
+                    player1email_row = WORKSHEET.find(player_1_info[1]).row
 
                 elif i == 1:
                     player_2_info = create_new_players(player)
                     update_players_worksheet(player_2_info)
                     player2name = player_2_info[0]
                     player2score = player_2_info[2]
-                    player2email_row = PLAYERS_WORKSHEET.find(player_2_info[1]).row
+                    player2email_row = WORKSHEET.find(player_2_info[1]).row
             break
 
         separate_line()
@@ -226,7 +226,7 @@ def create_new_players(player_number: str) -> list:
     Check if email is already in the database
     @param player_number(string): number of the player who's turn it is
     """
-    email_column = PLAYERS_WORKSHEET.col_values(2)
+    email_column = WORKSHEET.col_values(2)
 
     while True:
         player = input(f"{player_number} - what's your name?\n")
@@ -279,7 +279,7 @@ def update_players_worksheet(data: list):
     Add a new row with data provided by both players
     @param data(list): Player's name and email values
     """
-    PLAYERS_WORKSHEET.append_row(data)
+    WORKSHEET.append_row(data)
 
 
 def start_game_message(player1name: str, player2name: str):
