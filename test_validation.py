@@ -4,7 +4,7 @@ import validation as val
 
 class TestValidate(unittest.TestCase):
     """
-    Verification of the user email and user name 
+    Verification of the user email and user name
     input values and types
     """
     def test_validate_email(self):
