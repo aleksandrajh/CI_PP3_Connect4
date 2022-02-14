@@ -17,5 +17,11 @@ class TestValidate(unittest.TestCase):
         self.assertEqual(val.validate_username('AveryLongPlayername'), None)
         self.assertEqual(val.validate_username(123), False)
 
+class TestLogIn(unittest.TestCase):
+    def test_log_in_int(self):
+        self.assertEqual(val.log_in_players(123), None)
+        self.assertTrue(val.log_in_players(['User1', 'User2']), True)
+
+
 if __name__ == '__main__':
     unittest.main()

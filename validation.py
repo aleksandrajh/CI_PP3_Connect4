@@ -44,34 +44,38 @@ def log_in_players(players):
     global player1email_row
     global player2email_row
 
-    for i, player in enumerate(players):
-        while True:
-            email = get_email(player)
-            existing_player = is_player_registered(email)
+    try:
+        for i, player in enumerate(players):
+            while True:
+                email = get_email(player)
+                existing_player = is_player_registered(email)
 
-            if existing_player:
-                if i == 0:
-                    player1email_row = PLAYERS_WORKSHEET.find(email).row
-                    player1name = \
-                        PLAYERS_WORKSHEET.row_values(player1email_row)[0]
-                    player1score = \
-                        int(PLAYERS_WORKSHEET.row_values(player1email_row)[2])
+                if existing_player:
+                    if i == 0:
+                        player1email_row = PLAYERS_WORKSHEET.find(email).row
+                        player1name = \
+                            PLAYERS_WORKSHEET.row_values(player1email_row)[0]
+                        player1score = \
+                            int(PLAYERS_WORKSHEET.row_values(player1email_row)[2])
 
-                    print(Col.BLUE + f"\nHello {player1name}!\n")
-                elif i == 1:
-                    player2email_row = PLAYERS_WORKSHEET.find(email).row
-                    player2name = \
-                        PLAYERS_WORKSHEET.row_values(player2email_row)[0]
-                    player2score = \
-                        int(PLAYERS_WORKSHEET.row_values(player2email_row)[2])
-                    print(Col.BLUE + f"\nHello {player2name}!\n")
-                break
+                        print(Col.BLUE + f"\nHello {player1name}!\n")
+                    elif i == 1:
+                        player2email_row = PLAYERS_WORKSHEET.find(email).row
+                        player2name = \
+                            PLAYERS_WORKSHEET.row_values(player2email_row)[0]
+                        player2score = \
+                            int(PLAYERS_WORKSHEET.row_values(player2email_row)[2])
+                        print(Col.BLUE + f"\nHello {player2name}!\n")
+                    break
 
-            else:
-                input_correct_email(player)
+                else:
+                    input_correct_email(player)
 
-    time.sleep(2)
-    start_game_message(player1name, player2name)
+            time.sleep(2)
+            start_game_message(player1name, player2name)
+    
+    except TypeError:
+        return None
 
 
 def get_email(playername: str) -> str:
