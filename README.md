@@ -213,14 +213,18 @@ VSCode was used to write the project code using Code Institute template
 
 ### Libraries
 
-- [colorama](https://pypi.org/project/colorama/) - used to add color to the terminal and enhance user experience
-- [email_validator](https://pypi.org/project/email-validator/) - used to validate user email input
-- [gspread](https://docs.gspread.org/en/latest/) - used to add and manipulate data in my Google spreadsheet and to interact with Google APIs
+#### Python Libraries
 - os - used to clear terminal
 - random - used to alternate first player to start the game
 - sys & sleep - used to create a typing effect within the games rules
 - time - used to displayed delayed messages in the terminal
 - [unittest](https://docs.python.org/3/library/unittest.html) - used to carry out testing on single units in validation.py file
+
+#### Third Party Libraries
+- [colorama](https://pypi.org/project/colorama/) - JUSTIFICATION: I used this library to add color to the terminal and enhance user experience. I marked warning/error information with color red and user feedback with blue and green
+- [email_validator](https://pypi.org/project/email-validator/) - JUSTIFICATION: I used this library to validate if user email input is of the form name@</span>example.com
+- [gspread](https://docs.gspread.org/en/latest/) - JUSTIFICATION: I used gspread to add and manipulate data in my Google spreadsheet and to interact with Google APIs
+- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/) - JUSTIFICATION: module used to set up the authentification needed to access the Google API and connect my Service Account with the Credentials function. A creds.json file is created with all details the API needs to access the google account. In deployment to heroku this information is stored in the config var section.
 
 [Back to Table Of Contents](#table-of-contents)
 
@@ -594,6 +598,8 @@ The testing approach is as follows:
 
 I needed to amend the function and add 'Try Except' blocks to handle TypeError.
 Initial error called - 'TypeError: object of type 'int' has no len()'
+
+
 ![User email unit test](docs/testing/unit-tests/email-validation-test.jpg)
 ![User name unit test](docs/testing/unit-tests/username-validation-test.jpg)
 
@@ -647,7 +653,7 @@ This application has been deployed from GitHub to Heroku by following the steps:
 3. Highlight the "HTTPS" button to clone with HTTPS and copy the link
 4. Open Git Bash
 5. Change the current working directory to the one where you want the cloned directory
-6. Type git clone and paste the URL from the clipboard ($ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY)
+6. Type git clone and paste the URL from the clipboard ($ git clone <span>https://</span>github.com/YOUR-USERNAME/YOUR-REPOSITORY)
 7. Press Enter to create your local clone
 
 [Back to Table Of Contents](#table-of-contents)
@@ -675,6 +681,6 @@ This application has been deployed from GitHub to Heroku by following the steps:
 
 ## Acknowledgements
 I would like to thank everyone who supported me in the development of this project:
-- My mentor Mo for professional guidance, helpful feedback and words of encouragement whilst creating the project. Also, for pushing me to learn about the unit test and include it within this project.
+- My mentor Mo for professional guidance, helpful feedback and words of encouragement whilst creating the project. Also, for encouraging me to learn about the unit test and including it within this project.
 - My partner for his support and playing/testing the game with me
 - Code Institute community on Slack for resources and support
