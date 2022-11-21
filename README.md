@@ -2,7 +2,7 @@
 
 **Developer: Aleksandra Haniok**
 
-💻 [Visit live website](https://ci-pp3-connect4.herokuapp.com/)
+💻 [Visit live website](https://ci-pp3-connect4.onrender.com/)
 
 ![Mockup image](docs/screenshot-home.JPG)
 
