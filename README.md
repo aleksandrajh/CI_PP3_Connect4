@@ -206,8 +206,8 @@ The following flowchart summarises the structure and logic of the application.
 - [GitHub](https://github.com/) was used as a remote repository to store project code
 - [Google Cloud Platform](https://cloud.google.com/cloud-console/) was used to manage access and permissions to the Google Services such as Google auth, sheets etc.
 - [Google Sheets](https://www.google.co.uk/sheets/about/) were used to store players details
-- [Heroku Platform](https://dashboard.heroku.com/) was used to deploy the project into live environment
 - [PEP8](http://pep8online.com/) was used to check my code against Python conventions
+- [Render Platform](https://https://render.com/) was used to deploy the project into live environment
 - [Visual Studio Code (VSCode)](https://code.visualstudio.com/)
 VSCode was used to write the project code using Code Institute template
 
@@ -224,7 +224,7 @@ VSCode was used to write the project code using Code Institute template
 - [colorama](https://pypi.org/project/colorama/) - JUSTIFICATION: I used this library to add color to the terminal and enhance user experience. I marked warning/error information with color red and user feedback with blue and green
 - [email_validator](https://pypi.org/project/email-validator/) - JUSTIFICATION: I used this library to validate if user email input is of the form name@</span>example.com
 - [gspread](https://docs.gspread.org/en/latest/) - JUSTIFICATION: I used gspread to add and manipulate data in my Google spreadsheet and to interact with Google APIs
-- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/) - JUSTIFICATION: module used to set up the authentification needed to access the Google API and connect my Service Account with the Credentials function. A creds.json file is created with all details the API needs to access the google account. In deployment to heroku this information is stored in the config var section.
+- [google.oauth2.service_account](https://google-auth.readthedocs.io/en/master/) - JUSTIFICATION: module used to set up the authentification needed to access the Google API and connect my Service Account with the Credentials function. A creds.json file is created with all details the API needs to access the google account. In deployment to Render this information is stored in the config var section.
 
 [Back to Table Of Contents](#table-of-contents)
 
@@ -619,7 +619,7 @@ When running the test initially, there was a TypeError called - 'TypeError: 'int
 | ------- | ------- |
 | When selecting 'go back to main menu' option after the game has finished, the game title was not displayed | Correct the function's indentation |
 | When selecting a correct menu option after a few wrong numeric inputs the relevant game option was not called | Move the while loop at the top within the function |
-| Underscores within the game title were not displayed after deployment to Heroku portal | Changed color settings for yellow & red |
+| Underscores within the game title were not displayed after deployment to Render portal | Changed color settings for yellow & red |
 | Gradient background color does not take up the full screen size | Add background-attachment property |
 | Players names input values are not displayed in the game – instead of name a “‘Player1’’s / ‘Player2’’s move.” is shown | Reassign a value of player1name & player2name to the indexed-0 value (name) input by the user in ‘create_new_players’ function |
 | Users input data was recorded in the same row in four columns instead of 2 separate rows | Created a list of players and while loop inside the 'register_new_players' function for Google Spreadsheet update separately for two players |
@@ -627,20 +627,25 @@ When running the test initially, there was a TypeError called - 'TypeError: 'int
 
 ## Deployment
 
-### Heroku
-This application has been deployed from GitHub to Heroku by following the steps:
+### Render
+This application has been deployed from GitHub to Render by following the steps:
 
-1. Create or log in to your account at heroku.com
-2. Create a new app, add a unique app name (this project is named "ci-pp3-connect4") and choose your region
-3. Click on create app
-4. Go to "Settings"
-5. Under Config Vars store any sensitive data you saved in .json file. Name 'Key' field, copy the .json file and paste it to 'Value' field. Also add a key 'PORT' and value '8000'.
-6. Add required buildpacks (further dependencies). For this project, I set up 'Python' and 'node.js' in that order.
-7. Go to "Deploy" and select "GitHub" in "Deployment method"
-8. To link up our Heroku app to our Github repository code enter your repository name, click 'Search' and then 'Connect' when it shows below
-9.  Choose the branch you want to buid your app from
-10. If prefered, click on "Enable Automatic Deploys", which keeps the app up to date with your GitHub repository
-11. Wait for the app to build. Once ready you will see the “App was successfully deployed” message and a 'View' button to take you to your deployed link.
+1. Create or log in to your account at render.com
+2. Make sure you have connected your GitHub account to Render.com - follow the steps to Get Started and Sign up for Render. Click “New +” and select “Web Service”, on the right of the page, select “+ Connect account” for GitHub, ensure All repositories is selected and click “Install”
+4. Web service creation: Click “New +” and then “Web Service”. Search for relevant repo and click “Connect”.
+5. Settings: the web service's configuration settings are required to ensure the application is configured correctly. Add a Setting Name, leave Root Directory blank, add Environment 'Python3', Region (The physical location of the server hosting the web service), Branch - main
+6. Set the Build Command:
+    ```
+    pip install -r requirements.txt && npm install
+    ```
+7. Set the Start Command
+    ```
+    node index.js
+    ```
+8. Set up Environment Variables: Scroll down and click “Advanced” and “Add Environment Variable”. Add a key 'PORT' and value of '8000' and 'PYTHON_VERSION' with value of 3.10.7.
+9. Click “Add Secret File” and add a Filename 'creds.json' and file content.
+10. Click “Create Web Service” and wait for the project to build. First, the build is initiated. Then the build and deployment processes are carried out. Finally, the application is deployed and ready for public viewing.
+
 
 ### Forking the GitHub Repository
 1. Go to the GitHub repository
